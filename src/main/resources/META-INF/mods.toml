@@ -1,0 +1,29 @@
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[39,)" #mandatory
+license="All rights reserved"
+[[mods]] #mandatory
+modId="takesapillage" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="It Takes a Pillage" #mandatory
+logoFile="takesapillage.png" #optional
+#credits="Thanks for this example mod goes to Java" #optional
+authors="Izofar" #optional
+description='''
+Adding depth to the pillager civilization.
+'''
+
+[[dependencies.takesapillage]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[39,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.takesapillage]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,1.19)"
+    ordering="NONE"
+    side="BOTH"

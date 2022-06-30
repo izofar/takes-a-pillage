@@ -1,0 +1,13 @@
+{
+
+	"item.takesapillage.archer_spawn_egg": "Archer Spawn Egg",
+	"item.takesapillage.skirmisher_spawn_egg": "Skirmisher Spawn Egg",
+	"item.takesapillage.legioner_spawn_egg": "Legioner Spawn Egg",
+
+	"item.takesapillage.ravager_horn": "Ravager Horn",
+	
+	"entity.takesapillage.clay_golem": "Clay Golem",
+	"entity.takesapillage.archer": "Archer",
+	"entity.takesapillage.skirmisher": "Skirmisher",
+	"entity.takesapillage.legioner": "Legioner"
+}

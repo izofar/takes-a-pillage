@@ -1,0 +1,42 @@
+{
+  "name": "takesapillage:pillager_camp/palisade/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:pillager_camp/palisade/3x1a",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "takesapillage:pillager_camp/palisade/2x1a",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "takesapillage:pillager_camp/palisade/1x2a",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:pillager_camp/palisade/1x2b",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

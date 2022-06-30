@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:pillager_camp/entities/illager",
+	"fallback": "takesapillage:pillager_camp/entities/illager",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_illager",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}
