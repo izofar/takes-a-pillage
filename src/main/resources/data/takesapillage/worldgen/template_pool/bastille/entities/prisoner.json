@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:bastille/entities/prisoner",
+	"fallback": "takesapillage:bastille/entities/prisoner",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_captive",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

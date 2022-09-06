@@ -1,0 +1,15 @@
+{
+  "name": "takesapillage:bastille/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/center_house",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

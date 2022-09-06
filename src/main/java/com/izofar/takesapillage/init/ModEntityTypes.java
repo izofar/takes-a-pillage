@@ -17,11 +17,8 @@ public abstract class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> MOD_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, TakesAPillageMod.MODID);
 
     public static final RegistryObject<EntityType<ClayGolem>> CLAY_GOLEM = MOD_ENTITY_TYPES.register("clay_golem", () -> EntityType.Builder.of(ClayGolem::new, MobCategory.MISC).sized(1.4F, 2.7F).clientTrackingRange(10).build((new ResourceLocation(TakesAPillageMod.MODID, "clay_golem")).toString()));
-
     public static final RegistryObject<EntityType<Archer>> ARCHER = MOD_ENTITY_TYPES.register("archer", () -> EntityType.Builder.of(Archer::new, MobCategory.MONSTER).canSpawnFarFromPlayer().sized(0.6F, 1.95F).clientTrackingRange(8).build((new ResourceLocation(TakesAPillageMod.MODID, "archer")).toString()));
-
     public static final RegistryObject<EntityType<Skirmisher>> SKIRMISHER = MOD_ENTITY_TYPES.register("skirmisher", () -> EntityType.Builder.of(Skirmisher::new, MobCategory.MONSTER).canSpawnFarFromPlayer().sized(0.6F, 1.95F).clientTrackingRange(8).build((new ResourceLocation(TakesAPillageMod.MODID, "skirmisher")).toString()));
-
     public static final RegistryObject<EntityType<Legioner>> LEGIONER = MOD_ENTITY_TYPES.register("legioner", () -> EntityType.Builder.of(Legioner::new, MobCategory.MONSTER).canSpawnFarFromPlayer().sized(0.6F, 1.95F).clientTrackingRange(8).build((new ResourceLocation(TakesAPillageMod.MODID, "legioner")).toString()));
 
     public static void register(IEventBus eventBus) {

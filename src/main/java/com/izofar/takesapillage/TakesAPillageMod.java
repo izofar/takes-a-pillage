@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 public class TakesAPillageMod
 {
     public static final String MODID = "takesapillage";
-
     public static final Logger LOGGER = LogManager.getLogger();
 
     public TakesAPillageMod() {
@@ -31,9 +30,6 @@ public class TakesAPillageMod
     private void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModLists.setupEntityLists();
-            ModStructures.setupStructures();
-            ModConfiguredStructures.registerConfiguredStructures();
-            ModConfiguredFeatures.registerConfiguredFeatures();
         });
     }
 }

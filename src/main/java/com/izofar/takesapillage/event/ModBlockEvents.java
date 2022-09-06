@@ -1,4 +1,4 @@
-package com.izofar.takesapillage.entity.event;
+package com.izofar.takesapillage.event;
 
 import com.izofar.takesapillage.entity.ClayGolem;
 import net.minecraft.world.level.Level;

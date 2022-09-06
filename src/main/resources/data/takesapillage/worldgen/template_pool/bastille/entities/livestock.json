@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:bastille/entities/livestock",
+	"fallback": "takesapillage:bastille/entities/livestock",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_livestock",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

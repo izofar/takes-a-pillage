@@ -75,7 +75,7 @@ public class PillageSiege implements CustomSpawner {
         for (Player player : serverLevel.players()) {
             if (!player.isSpectator()) {
                 BlockPos blockpos = player.blockPosition();
-                if (serverLevel.isVillage(blockpos) && serverLevel.getBiome(blockpos).getBiomeCategory() != Biome.BiomeCategory.MUSHROOM) {
+                if (serverLevel.isVillage(blockpos) && Biome.getBiomeCategory(serverLevel.getBiome(blockpos)) != Biome.BiomeCategory.MUSHROOM) {
                     for (int i = 0; i < 10; i++) {
                         float f = serverLevel.random.nextFloat() * 6.2831855F;
                         this.spawnX = blockpos.getX() + Mth.floor(Mth.cos(f) * 32.0F);

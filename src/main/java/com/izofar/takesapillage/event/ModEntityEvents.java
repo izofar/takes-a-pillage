@@ -1,4 +1,4 @@
-package com.izofar.takesapillage.entity.event;
+package com.izofar.takesapillage.event;
 
 import com.google.common.collect.ImmutableList;
 import com.izofar.takesapillage.entity.ClayGolem;

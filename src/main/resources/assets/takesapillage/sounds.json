@@ -1,61 +1,61 @@
 {
   "attack": {
-    "subtitle": "survivalprime.entity.clay_golem.attack",
+    "subtitle": "takesapillage.entity.clay_golem.attack",
     "sounds": [
-      "survivalprime:entity/clay_golem/throw"
+      "takesapillage:entity/clay_golem/throw"
     ]
   },
   "damage": {
-    "subtitle": "survivalprime.entity.clay_golem.damage",
+    "subtitle": "takesapillage.entity.clay_golem.damage",
     "sounds": [
       {
-        "name": "survivalprime:entity/clay_golem/damage1",
+        "name": "takesapillage:entity/clay_golem/damage1",
         "volume": 0.8
       },
       {
-        "name": "survivalprime:entity/clay_golem/damage2",
+        "name": "takesapillage:entity/clay_golem/damage2",
         "volume": 0.8
       },
       {
-        "name": "survivalprime:entity/clay_golem/damage1",
+        "name": "takesapillage:entity/clay_golem/damage1",
         "volume": 0.8,
         "pitch": 0.8
       },
       {
-        "name": "survivalprime:entity/clay_golem/damage2",
+        "name": "takesapillage:entity/clay_golem/damage2",
         "volume": 0.8,
         "pitch": 0.8
       }
     ]
   },
   "death": {
-    "subtitle": "survivalprime.entity.clay_golem.death",
+    "subtitle": "takesapillage.entity.clay_golem.death",
     "sounds": [
-      "survivalprime:entity/clay_golem/death"
+      "takesapillage:entity/clay_golem/death"
     ]
   },
   "hurt": {
-    "subtitle": "survivalprime.entity.clay_golem.hurt",
+    "subtitle": "takesapillage.entity.clay_golem.hurt",
     "sounds": [
-      "survivalprime:entity/clay_golem/hit1",
-      "survivalprime:entity/clay_golem/hit2",
-      "survivalprime:entity/clay_golem/hit3",
-      "survivalprime:entity/clay_golem/hit4"
+      "takesapillage:entity/clay_golem/hit1",
+      "takesapillage:entity/clay_golem/hit2",
+      "takesapillage:entity/clay_golem/hit3",
+      "takesapillage:entity/clay_golem/hit4"
     ]
   },
   "repair": {
-    "subtitle": "survivalprime.entity.clay_golem.repair",
+    "subtitle": "takesapillage.entity.clay_golem.repair",
     "sounds": [
-      "survivalprime:entity/clay_golem/repair"
+      "takesapillage:entity/clay_golem/repair"
     ]
   },
   "step": {
-    "subtitle": "survivalprime.entity.clay_golem.step",
+    "subtitle": "takesapillage.entity.clay_golem.step",
     "sounds": [
-      "survivalprime:entity/clay_golem/walk1",
-      "survivalprime:entity/clay_golem/walk2",
-      "survivalprime:entity/clay_golem/walk3",
-      "survivalprime:entity/clay_golem/walk4"
+      "takesapillage:entity/clay_golem/walk1",
+      "takesapillage:entity/clay_golem/walk2",
+      "takesapillage:entity/clay_golem/walk3",
+      "takesapillage:entity/clay_golem/walk4"
     ]
   }
 }
