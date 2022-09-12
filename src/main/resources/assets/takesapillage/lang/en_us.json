@@ -5,9 +5,40 @@
 	"item.takesapillage.legioner_spawn_egg": "Legioner Spawn Egg",
 
 	"item.takesapillage.ravager_horn": "Ravager Horn",
-	
+	"item.takesapillage.bastille_blues_music_disc": "Music Disc",
+	"item.takesapillage.bastille_blues_music_disc.desc": "izofar - Bastille Blues",
+
 	"entity.takesapillage.clay_golem": "Clay Golem",
 	"entity.takesapillage.archer": "Archer",
 	"entity.takesapillage.skirmisher": "Skirmisher",
-	"entity.takesapillage.legioner": "Legioner"
+	"entity.takesapillage.legioner": "Legioner",
+
+	"takesapillage.subtitle.entity.clay_golem.attack": "Clay Golem Attack",
+	"takesapillage.subtitle.entity.clay_golem.damage": "Clay Golem Damage",
+	"takesapillage.subtitle.entity.clay_golem.death": "Clay Golem Death",
+	"takesapillage.subtitle.entity.clay_golem.hurt": "Clay Golem Hurt",
+	"takesapillage.subtitle.entity.clay_golem.repair": "Clay Golem Repair",
+	"takesapillage.subtitle.entity.clay_golem.step": "Clay Golem Step",
+
+	"takesapillage.subtitle.entity.legioner.ambient": "Legioner Ambient",
+	"takesapillage.subtitle.entity.legioner.celebrate": "Legioner Celebrate",
+	"takesapillage.subtitle.entity.legioner.death": "Legioner Death",
+	"takesapillage.subtitle.entity.legioner.hurt": "Legioner Hurt",
+
+	"advancements.root.title": "It Takes A Pillage",
+	"advancements.root.description": "Explore the Overworld for New Structures!",
+	"advancements.bastille.title": "Eh-eh-oh, eh-oh",
+	"advancements.bastille.description": "Locate a Bastille",
+	"advancements.pillager_camp.title": "Campfire Song Song",
+	"advancements.pillager_camp.description": "Locate a Pillager Camp",
+
+	"death.attack.clay_golem": "%1$s was pummeled by %2$s",
+	"death.attack.clay_golem.item": "%1$s was pummeled %2$s using %3$s",
+	"death.attack.archer": "%1$s was sniped by %2$s",
+	"death.attack.archer.item": "%1$s was sniped %2$s using %3$s",
+	"death.attack.skirmisher": "%1$s was chopped to bits by %2$s",
+	"death.attack.skirmisher.item": "%1$s was chopped to bits by %2$s while wielding %3$s",
+	"death.attack.legioner": "%1$s was struck down by %2$s",
+	"death.attack.legioner.item": "%1$s was struck down by %2$s while wielding %3$s"
+
 }

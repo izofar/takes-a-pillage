@@ -10,6 +10,24 @@
         "projection": "rigid",
         "element_type": "minecraft:legacy_single_pool_element"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/center_hut",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/center_tower",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
     }
   ]
 }

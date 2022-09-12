@@ -16,9 +16,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
 @OnlyIn(Dist.CLIENT)
-public class ClayGolemFlowerLayer extends RenderLayer<ClayGolem, ClayGolemModel<ClayGolem>> {
+public class ClayGolemFlowerLayer extends RenderLayer<ClayGolem, ClayGolemModel> {
 
-    public ClayGolemFlowerLayer(RenderLayerParent<ClayGolem, ClayGolemModel<ClayGolem>> layer) {
+    public ClayGolemFlowerLayer(RenderLayerParent<ClayGolem, ClayGolemModel> layer) {
         super(layer);
     }
 

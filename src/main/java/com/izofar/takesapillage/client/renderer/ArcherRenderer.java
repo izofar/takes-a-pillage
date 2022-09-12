@@ -17,8 +17,8 @@ public class ArcherRenderer extends IllagerRenderer<Archer> {
     private static final ResourceLocation ARCHER = new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/archer.png");
 
     public ArcherRenderer(EntityRendererProvider.Context context) {
-        super(context, new IllagerModel(context.bakeLayer(ModelLayers.EVOKER)), 0.5F);
-        this.addLayer(new ItemInHandLayer(this));
+        super(context, new IllagerModel<>(context.bakeLayer(ModelLayers.EVOKER)), 0.5F);
+        this.addLayer(new ItemInHandLayer<>(this));
         this.model.getHat().visible = true;
     }
 

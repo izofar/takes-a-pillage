@@ -169,6 +169,11 @@
             }
           ],
           "name": "minecraft:book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "takesapillage:bastille_blues_music_disc"
         }
       ]
     }

@@ -1,46 +1,38 @@
+# It Takes A Pillage
+> Advancing the pillager civilization.
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+Herein lies my changelog and motivation for developing a mod for Minecraft aiming to advance the capabilities of the pillager civilization, as well as provide additional challenges and compelling gameplay in the survival game mode.
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+## Motivation
 
-Setup Process:
-==============================
+Modifications and additions to pillager structure spawning offer wide potential to introduce new lore implications.
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+I will add a new structure, called pillager camps, that spawn in the overworld. These are a medium-sized pillager base scattered throughout flat terrain, with additional loot and enemies.
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `gradlew genEclipseRuns` (`./gradlew genEclipseRuns` if you are on Mac/Linux)
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+I will add bastilles to the overworld. These are firmer pillager establishments, where prisoners and pillaged loot are brought.
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `gradlew genIntellijRuns` (`./gradlew genIntellijRuns` if you are on Mac/Linux)
-4. Refresh the Gradle Project in IDEA if required.
+These new structures need new enemies. Vanilla-themed variations on the pillager will patrol these structures, including the archer, skirmisher, and legioner.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+Pillagers won't only sit idly waiting for a player with bad omen to attack a village. Sieges on villages can occur any night.
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+## Changelog
 
-Additional Resources: 
-=========================
-Community Documentation: http://mcforge.readthedocs.io/en/latest/gettingstarted/  
-LexManos' Install Video: https://www.youtube.com/watch?v=8VEdtQLuLO0  
-Forge Forum: https://forums.minecraftforge.net/  
-Forge Discord: https://discord.gg/UvedJ9m  
+### Items
+* Added a ravager horn, one of which is always dropped by slain ravagers. Its use will give the player the bad omen effect
+* Added the "Bastille Blues" music disc, by izofar
+* Added spawn eggs for each respective mob
+
+### Mobs
+* Added the Archer, a quick, hooded pillager that wields a bow
+* Added the Skirmisher, a very fast, axe-wielding pillager with limited visibility
+* Added the Legioner, an armored pillager equipped with sword and shield
+* Added the clay golem, a weaker but faster golem that is cheaper to summon
+
+### World
+* Pillager encampments now generate over flat terrain in the overworld
+* Bastilles now generate over flat terrain in the overworld
+* Pillage sieges may now happen in villages during nighttime
+* Natural iron golem spawning has been replaced by clay golems
+
+### GUI
+* Added Advancements to be achieved by exploring 'It Take's a Pillage'

@@ -16,11 +16,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-public class ClayGolemCrackinessLayer extends RenderLayer<ClayGolem, ClayGolemModel<ClayGolem>> {
+public class ClayGolemCrackinessLayer extends RenderLayer<ClayGolem, ClayGolemModel> {
 
     private static final Map<IronGolem.Crackiness, ResourceLocation> resourceLocations = ImmutableMap.of(IronGolem.Crackiness.LOW, new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/clay_golem/clay_golem_crackiness_low.png"), IronGolem.Crackiness.MEDIUM, new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/clay_golem/clay_golem_crackiness_medium.png"), IronGolem.Crackiness.HIGH, new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/clay_golem/clay_golem_crackiness_high.png"));
 
-    public ClayGolemCrackinessLayer(RenderLayerParent<ClayGolem, ClayGolemModel<ClayGolem>> layer) { super(layer); }
+    public ClayGolemCrackinessLayer(RenderLayerParent<ClayGolem, ClayGolemModel> layer) { super(layer); }
 
     public void render(PoseStack stack, MultiBufferSource buffersource, int i, ClayGolem entity, float f0, float f1, float f2, float f3, float f4, float f5) {
         if (!entity.isInvisible()) {

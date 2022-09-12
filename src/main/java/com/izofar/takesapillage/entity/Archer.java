@@ -1,20 +1,26 @@
 package com.izofar.takesapillage.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.RangedBowAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -30,10 +36,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
+import java.util.UUID;
 
 public class Archer extends AbstractIllager implements RangedAttackMob {
 
-    private final RangedBowAttackGoal<AbstractSkeleton> bowGoal = new RangedBowAttackGoal(this, 1.0D, 20, 15.0F);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_TARGET_UUID = SynchedEntityData.defineId(Archer.class, EntityDataSerializers.OPTIONAL_UUID);
+
+    private final RangedBowAttackGoal<Archer> bowGoal = new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F);
 
     public Archer(EntityType<? extends AbstractIllager> entitytype, Level world) {
         super(entitytype, world);
@@ -42,10 +52,10 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.42D)
+                .add(Attributes.MOVEMENT_SPEED, 0.36D)
                 .add(Attributes.MAX_HEALTH, 24.0D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.FOLLOW_RANGE, 32.0D);
+                .add(Attributes.FOLLOW_RANGE, 40.0D);
     }
     
     @Override
@@ -57,14 +67,20 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 15.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 15.0F));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, AbstractVillager.class, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, IronGolem.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
     }
 
     @Override
     public AbstractIllager.IllagerArmPose getArmPose() {
-        return AbstractIllager.IllagerArmPose.CROSSBOW_HOLD;
+        return this.getTarget() != null ? IllagerArmPose.CROSSBOW_HOLD : IllagerArmPose.NEUTRAL;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_TARGET_UUID, Optional.empty());
     }
 
     @Override
@@ -125,7 +141,7 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
     }
 
     protected void reassessWeaponGoal() {
-        if (this.level != null && !this.level.isClientSide) {
+        if (!this.level.isClientSide) {
             this.goalSelector.removeGoal(this.bowGoal);
             ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof BowItem));
             if (itemstack.is(Items.BOW)) {
@@ -134,5 +150,46 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
                 this.goalSelector.addGoal(4, this.bowGoal);
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getTarget(){
+        try{
+            UUID uuid = this.getTargetUUID();
+            return uuid == null ? super.getTarget() : this.level.getPlayerByUUID(uuid);
+        }catch(IllegalArgumentException exception){
+            return super.getTarget();
+        }
+    }
+
+    @Override
+    public void setTarget(@Nullable LivingEntity target){
+        super.setTarget(target);
+        this.setTargetUUID(target == null ? null : target.getUUID());
+    }
+
+    @Nullable
+    private UUID getTargetUUID(){
+        return this.entityData.get(DATA_TARGET_UUID).orElse(null);
+    }
+
+    private void setTargetUUID(@Nullable UUID uuid){
+        this.entityData.set(DATA_TARGET_UUID, Optional.ofNullable(uuid));
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.PILLAGER_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.PILLAGER_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33306_) {
+        return SoundEvents.PILLAGER_HURT;
     }
 }

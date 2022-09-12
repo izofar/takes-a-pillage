@@ -1,0 +1,31 @@
+{
+  "parent": "takesapillage:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "title": {
+      "translate": "advancements.pillager_camp.title"
+    },
+    "description": {
+      "translate": "advancements.pillager_camp.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "in_pillager_camp": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "feature": "takesapillage:pillager_camp"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "in_pillager_camp"
+    ]
+  ]
+}

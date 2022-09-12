@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ClayGolemRenderer extends MobRenderer<ClayGolem, ClayGolemModel<ClayGolem>> {
+public class ClayGolemRenderer extends MobRenderer<ClayGolem, ClayGolemModel> {
 
     private static final ResourceLocation GOLEM_LOCATION = new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/clay_golem/clay_golem.png");
 

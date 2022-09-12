@@ -1,11 +1,13 @@
 package com.izofar.takesapillage.entity;
 
+import com.izofar.takesapillage.entity.ai.ModIllagerAI;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,7 +20,6 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Ravager;
-import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
@@ -45,7 +46,7 @@ public class Skirmisher extends AbstractIllager {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.36D)
-                .add(Attributes.FOLLOW_RANGE, 32.0D)
+                .add(Attributes.FOLLOW_RANGE, 16.0D)
                 .add(Attributes.MAX_HEALTH, 24.0D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D);
     }
@@ -59,12 +60,17 @@ public class Skirmisher extends AbstractIllager {
         this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
         this.goalSelector.addGoal(4, new SkirmisherMeleeAttackGoal(this));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, AbstractVillager.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, IronGolem.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity target){
+        return ModIllagerAI.doHurtTarget(this, target, "skirmisher");
     }
 
     @Override
@@ -120,6 +126,21 @@ public class Skirmisher extends AbstractIllager {
         }
     }
 
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.VINDICATOR_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.VINDICATOR_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_34103_) {
+        return SoundEvents.VINDICATOR_HURT;
+    }
+
     private static class SkirmisherBreakDoorGoal extends BreakDoorGoal {
         public SkirmisherBreakDoorGoal(Mob mob) {
             super(mob, 6, Skirmisher.DOOR_BREAKING_PREDICATE);
@@ -128,18 +149,21 @@ public class Skirmisher extends AbstractIllager {
 
         @Override
         public boolean canContinueToUse() {
-            return (((Vindicator)this.mob).hasActiveRaid() && super.canContinueToUse());
+            return this.getMob().hasActiveRaid() && super.canContinueToUse();
         }
 
         @Override
         public boolean canUse() {
-            Skirmisher skirmisher = (Skirmisher)this.mob;
-            return (skirmisher.hasActiveRaid() && skirmisher.random.nextInt(reducedTickDelay(10)) == 0 && super.canUse());
+            return this.getMob().hasActiveRaid() && this.getMob().random.nextInt(reducedTickDelay(10)) == 0 && super.canUse();
         }
 
         public void start() {
             super.start();
             this.mob.setNoActionTime(0);
+        }
+
+        private Skirmisher getMob(){
+            return (Skirmisher) this.mob;
         }
     }
 }

@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -62,6 +64,7 @@ public class ClayGolem extends IronGolem {
         }
         BlockPos blockpos = blockpattern$patternhelper.getBlock(1, 2, 0).getPos();
         ClayGolem claygolem = ModEntityTypes.CLAY_GOLEM.get().create(world);
+        if(claygolem == null) return;
         claygolem.setPlayerCreated(true);
         claygolem.moveTo(blockpos.getX() + 0.5D, blockpos.getY() + 0.05D, blockpos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addFreshEntity(claygolem);
@@ -71,6 +74,23 @@ public class ClayGolem extends IronGolem {
             for (int k = 0; k < golemPattern.getHeight(); k++)
                 world.blockUpdated(blockpattern$patternhelper.getBlock(i, k, 0).getPos(), Blocks.AIR);
         }
+    }
+
+    // IronGolem.goHurtTarget(Entity target) with modified DamageSource on line 87
+    @Override
+    public boolean doHurtTarget(Entity target){
+        this.attackAnimationTick = 10;
+        this.level.broadcastEntityEvent(this, (byte)4);
+        float f = this.getAttackDamage();
+        float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
+        boolean flag = target.hurt(new EntityDamageSource("clay_golem", this), f1);
+        if (flag) {
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
+        }
+
+        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        return flag;
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class ClayGolemModel<T extends ClayGolem> extends HierarchicalModel<T> {
+public class ClayGolemModel extends HierarchicalModel<ClayGolem> {
 
     private final ModelPart root;
     private final ModelPart head;
@@ -42,7 +42,7 @@ public class ClayGolemModel<T extends ClayGolem> extends HierarchicalModel<T> {
         return this.root;
     }
 
-    public void setupAnim(T entity, float t, float theta, float unused, float phi, float psi) {
+    public void setupAnim(ClayGolem entity, float t, float theta, float unused, float phi, float psi) {
         this.head.yRot = phi * 0.017453292F;
         this.head.xRot = psi * 0.017453292F;
         this.right_leg.xRot = -1.5F * Mth.triangleWave(t, 13.0F) * theta;
@@ -51,7 +51,7 @@ public class ClayGolemModel<T extends ClayGolem> extends HierarchicalModel<T> {
         this.left_leg.yRot = 0.0F;
     }
 
-    public void prepareMobModel(T entity, float t, float theta, float phi) {
+    public void prepareMobModel(ClayGolem entity, float t, float theta, float phi) {
         int i = entity.getAttackAnimationTick();
         if (i > 0) {
             this.right_arm.xRot = -2.0F + 1.5F * Mth.triangleWave(i - phi, 10.0F);

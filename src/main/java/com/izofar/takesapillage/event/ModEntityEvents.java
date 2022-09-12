@@ -1,6 +1,7 @@
 package com.izofar.takesapillage.event;
 
 import com.google.common.collect.ImmutableList;
+import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.entity.ClayGolem;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -22,22 +23,23 @@ public abstract class ModEntityEvents {
 
     @SubscribeEvent
     public static void replaceNaturallySpawningIronGolemWithClayGolem(EntityJoinWorldEvent event) {
+        if(!ModCommonConfigs.REPLACE_IRON_GOLEMS.get()) return;
         Entity entity = event.getEntity();
         if (entity instanceof IronGolem irongolem
                 && !(event.getEntity() instanceof ClayGolem)
-                && !event.getWorld().isClientSide
-                && event.getWorld() instanceof ServerLevel world) {
-            if (!irongolem.isPlayerCreated()) {
-                ClayGolem claygolementity = ModEntityTypes.CLAY_GOLEM.get().create(world);
-                claygolementity.moveTo(irongolem.position());
-                golem_queue.add(claygolementity);
-                event.setCanceled(true);
-            }
+                && event.getWorld() instanceof ServerLevel world
+                && !irongolem.isPlayerCreated()) {
+            ClayGolem claygolementity = ModEntityTypes.CLAY_GOLEM.get().create(world);
+            if(claygolementity == null) return;
+            claygolementity.moveTo(irongolem.position());
+            golem_queue.add(claygolementity);
+            event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
     public static void checkForUnSpawnedGolem(TickEvent.WorldTickEvent event) {
+        if(!ModCommonConfigs.REPLACE_IRON_GOLEMS.get()) return;
         Level level = event.world;
         if (level instanceof ServerLevel world) {
             Queue<ClayGolem> remove_golem_queue = new LinkedList<>();
@@ -53,7 +55,8 @@ public abstract class ModEntityEvents {
 
     @SubscribeEvent
     public static void preventMilkFromRemovingBadOmen(PotionEvent.PotionAddedEvent event) {
-        if (event.getPotionEffect().getEffect().equals(MobEffects.BAD_OMEN))
+        if (event.getPotionEffect().getEffect().equals(MobEffects.BAD_OMEN)
+                && !ModCommonConfigs.REMOVE_BAD_OMEN.get())
             event.getPotionEffect().setCurativeItems(ImmutableList.of());
     }
 }
