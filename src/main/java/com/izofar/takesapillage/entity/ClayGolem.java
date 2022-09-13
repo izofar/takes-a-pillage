@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
 import net.minecraft.world.level.block.state.predicate.BlockMaterialPredicate;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Material;
 
 import java.util.function.Predicate;
@@ -111,7 +110,6 @@ public class ClayGolem extends IronGolem {
             } else {
                 float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                 this.playSound(ModSoundEvents.CLAY_GOLEM_REPAIR.get(), 1.0F, f1);
-                this.gameEvent(GameEvent.MOB_INTERACT, this.eyeBlockPosition());
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }

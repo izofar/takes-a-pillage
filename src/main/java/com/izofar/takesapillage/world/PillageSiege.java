@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.level.CustomSpawner;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -72,7 +72,7 @@ public class PillageSiege implements CustomSpawner {
         for (Player player : serverLevel.players()) {
             if (!player.isSpectator()) {
                 BlockPos blockpos = player.blockPosition();
-                if (serverLevel.isVillage(blockpos) && Biome.getBiomeCategory(serverLevel.getBiome(blockpos)) != Biome.BiomeCategory.MUSHROOM) {
+                if (serverLevel.isVillage(blockpos) && !serverLevel.getBiome(blockpos).is(BiomeTags.WITHOUT_ZOMBIE_SIEGES)) {
                     for (int i = 0; i < 10; ++i) {
                         float f = serverLevel.random.nextFloat() * ((float)Math.PI * 2F);
                         this.spawnX = blockpos.getX() + Mth.floor(Mth.cos(f) * 32.0F);
@@ -88,7 +88,7 @@ public class PillageSiege implements CustomSpawner {
                     if (serverLevel.getTimeOfDay(serverLevel.dayTime()) > Mth.frac(11.0D / 24.0D)) {
                         serverLevel.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.RAID_HORN, SoundSource.NEUTRAL, 64.0F, 1.0F);
                         serverLevel.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0F, 1.0F);
-                        serverLevel.gameEvent(null, GameEvent.RING_BELL, blockpos);
+                        serverLevel.gameEvent(null, GameEvent.BLOCK_CHANGE, blockpos);
                     }
                     return true;
                 }

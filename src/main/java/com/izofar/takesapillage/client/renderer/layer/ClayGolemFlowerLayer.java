@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.data.EmptyModelData;
 
 @OnlyIn(Dist.CLIENT)
 public class ClayGolemFlowerLayer extends RenderLayer<ClayGolem, ClayGolemModel> {
@@ -32,7 +31,7 @@ public class ClayGolemFlowerLayer extends RenderLayer<ClayGolem, ClayGolemModel>
         stack.scale(0.5F, 0.5F, 0.5F);
         stack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
         stack.translate(-0.5D, -0.5D, -0.5D);
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.POPPY.defaultBlockState(), stack, source, p_117174_, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE);
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.POPPY.defaultBlockState(), stack, source, p_117174_, OverlayTexture.NO_OVERLAY);
         stack.popPose();
     }
 }

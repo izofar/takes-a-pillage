@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -80,7 +81,7 @@ public class Skirmisher extends AbstractIllager {
     }
 
     @Override
-    protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) { this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE)); }
+    protected void populateDefaultEquipmentSlots(RandomSource randomsource, DifficultyInstance difficulty) { this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE)); }
 
     @Override
     public SoundEvent getCelebrateSound() {
@@ -106,8 +107,9 @@ public class Skirmisher extends AbstractIllager {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelaccessor, DifficultyInstance difficulty, MobSpawnType spawntype, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
         SpawnGroupData spawngroupdata = super.finalizeSpawn(levelaccessor, difficulty, spawntype, data, tag);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
-        this.populateDefaultEquipmentSlots(difficulty);
-        this.populateDefaultEquipmentEnchantments(difficulty);
+        RandomSource randomsource = levelaccessor.getRandom();
+        this.populateDefaultEquipmentSlots(randomsource, difficulty);
+        this.populateDefaultEquipmentEnchantments(randomsource, difficulty);
         return spawngroupdata;
     }
 

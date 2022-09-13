@@ -19,7 +19,17 @@
     "in_bastille": {
       "trigger": "minecraft:location",
       "conditions": {
-        "feature": "takesapillage:bastille"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "takesapillage:bastille"
+              }
+            }
+          }
+        ]
       }
     }
   },

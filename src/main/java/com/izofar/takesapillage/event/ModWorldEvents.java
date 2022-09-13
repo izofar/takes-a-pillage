@@ -14,8 +14,8 @@ public abstract class ModWorldEvents {
     public static final PillageSiege PILLAGE_SIEGE = new PillageSiege();
 
     @SubscribeEvent
-    public static void onSpecialSpawn(TickEvent.WorldTickEvent event) {
-        Level level = event.world;
+    public static void onSpecialSpawn(TickEvent.LevelTickEvent event) {
+        Level level = event.level;
         if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
                 && level instanceof ServerLevel serverWorld
                 && serverWorld.dimension() == Level.OVERWORLD) {

@@ -19,7 +19,17 @@
     "in_pillager_camp": {
       "trigger": "minecraft:location",
       "conditions": {
-        "feature": "takesapillage:pillager_camp"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "takesapillage:pillager_camp"
+              }
+            }
+          }
+        ]
       }
     }
   },

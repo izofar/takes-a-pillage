@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -92,7 +93,7 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
     }
 
     @Override
-    protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) { this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW)); }
+    protected void populateDefaultEquipmentSlots(RandomSource randomsource, DifficultyInstance difficulty) { this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW)); }
 
     @Override
     public void performRangedAttack(LivingEntity entity, float f) {
@@ -120,8 +121,9 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor levelaccessor, DifficultyInstance difficulty, MobSpawnType spawntype, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
         data = super.finalizeSpawn(levelaccessor, difficulty, spawntype, data, tag);
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
-        this.populateDefaultEquipmentSlots(difficulty);
-        this.populateDefaultEquipmentEnchantments(difficulty);
+        RandomSource randomsource = levelaccessor.getRandom();
+        this.populateDefaultEquipmentSlots(randomsource, difficulty);
+        this.populateDefaultEquipmentEnchantments(randomsource, difficulty);
         this.setCanPickUpLoot((this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier()));
         return data;
     }

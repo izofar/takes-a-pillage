@@ -18,7 +18,7 @@ public class ArcherRenderer extends IllagerRenderer<Archer> {
 
     public ArcherRenderer(EntityRendererProvider.Context context) {
         super(context, new IllagerModel<>(context.bakeLayer(ModelLayers.EVOKER)), 0.5F);
-        this.addLayer(new ItemInHandLayer<>(this));
+        this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
         this.model.getHat().visible = true;
     }
 

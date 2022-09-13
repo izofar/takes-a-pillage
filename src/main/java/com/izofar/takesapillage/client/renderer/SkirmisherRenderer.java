@@ -19,8 +19,8 @@ public class SkirmisherRenderer extends MobRenderer<Skirmisher, SkirmisherModel>
 
     public SkirmisherRenderer(EntityRendererProvider.Context context) {
         super(context, new SkirmisherModel(SkirmisherModel.createBodyLayer().bakeRoot()), 0.5F);
-        this.addLayer(new CustomHeadLayer<>(this, context.getModelSet()));
-        this.addLayer(new ItemInHandLayer<>(this));
+        this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
+        this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
     }
 
     public ResourceLocation getTextureLocation(Skirmisher skirmisher) {
