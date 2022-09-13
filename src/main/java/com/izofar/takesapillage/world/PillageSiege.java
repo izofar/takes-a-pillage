@@ -1,5 +1,6 @@
 package com.izofar.takesapillage.world;
 
+import com.izofar.takesapillage.TakesAPillageMod;
 import com.izofar.takesapillage.util.ModLists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -18,57 +19,53 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 
 public class PillageSiege implements CustomSpawner {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private boolean hasSetupSiege;
-
     private State siegeState = State.SIEGE_DONE;
-
     private int pillagersToSpawn;
-
     private int nextSpawnTime;
-
     private int spawnX;
-
     private int spawnY;
-
     private int spawnZ;
 
     @Override
-    public int tick(ServerLevel serverlevel, boolean trySiege, boolean unused) {
-        if (!serverlevel.isDay() && trySiege) {
+    public int tick(ServerLevel serverlevel, boolean spawnEnemies, boolean spawnFriendlies) {
+        if (!serverlevel.isDay() && spawnEnemies) {
             float f = serverlevel.getTimeOfDay(0.0F);
-            if (f == 0.5D)
-                this.siegeState = (serverlevel.random.nextInt(10) == 0) ? State.SIEGE_TONIGHT : State.SIEGE_DONE;
-            if (this.siegeState == State.SIEGE_DONE)
-                return 0;
-            if (!this.hasSetupSiege) {
-                if (!tryToSetupSiege(serverlevel))
-                    return 0;
-                this.hasSetupSiege = true;
+            if ((double)f == 0.5D) {
+                this.siegeState = serverlevel.random.nextInt(10) == 0 ? State.SIEGE_TONIGHT : State.SIEGE_DONE;
             }
-            if (this.nextSpawnTime > 0) {
-                this.nextSpawnTime--;
+            if (this.siegeState == State.SIEGE_DONE) {
                 return 0;
-            }
-            this.nextSpawnTime = 2;
-            if (this.pillagersToSpawn > 0) {
-                trySpawn(serverlevel);
-                this.pillagersToSpawn--;
             } else {
-                this.siegeState = State.SIEGE_DONE;
+                if (!this.hasSetupSiege) {
+                    if (!this.tryToSetupSiege(serverlevel)) {
+                        return 0;
+                    }
+                    this.hasSetupSiege = true;
+                }
+                if (this.nextSpawnTime > 0) {
+                    --this.nextSpawnTime;
+                    return 0;
+                } else {
+                    this.nextSpawnTime = 2;
+                    if (this.pillagersToSpawn > 0) {
+                        this.trySpawn(serverlevel);
+                        --this.pillagersToSpawn;
+                    } else {
+                        this.siegeState = State.SIEGE_DONE;
+                    }
+                    return 1;
+                }
             }
-            return 1;
+        } else {
+            this.siegeState = State.SIEGE_DONE;
+            this.hasSetupSiege = false;
+            return 0;
         }
-        this.siegeState = State.SIEGE_DONE;
-        this.hasSetupSiege = false;
-        return 0;
     }
 
     private boolean tryToSetupSiege(ServerLevel serverLevel) {
@@ -76,15 +73,15 @@ public class PillageSiege implements CustomSpawner {
             if (!player.isSpectator()) {
                 BlockPos blockpos = player.blockPosition();
                 if (serverLevel.isVillage(blockpos) && Biome.getBiomeCategory(serverLevel.getBiome(blockpos)) != Biome.BiomeCategory.MUSHROOM) {
-                    for (int i = 0; i < 10; i++) {
-                        float f = serverLevel.random.nextFloat() * 6.2831855F;
+                    for (int i = 0; i < 10; ++i) {
+                        float f = serverLevel.random.nextFloat() * ((float)Math.PI * 2F);
                         this.spawnX = blockpos.getX() + Mth.floor(Mth.cos(f) * 32.0F);
                         this.spawnY = blockpos.getY();
                         this.spawnZ = blockpos.getZ() + Mth.floor(Mth.sin(f) * 32.0F);
-                        Vec3 siegeLocation = findRandomSpawnPos(serverLevel, new BlockPos(this.spawnX, this.spawnY, this.spawnZ));
+                        Vec3 siegeLocation = this.findRandomSpawnPos(serverLevel, new BlockPos(this.spawnX, this.spawnY, this.spawnZ));
                         if (siegeLocation != null) {
                             this.nextSpawnTime = 0;
-                            this.pillagersToSpawn = serverLevel.random.nextInt(8) + 8;
+                            this.pillagersToSpawn = serverLevel.random.nextInt(6) + 4;
                             break;
                         }
                     }
@@ -113,7 +110,7 @@ public class PillageSiege implements CustomSpawner {
                 }
                 pillager.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pillager.blockPosition()), MobSpawnType.EVENT, null, null);
             } catch (Exception exception) {
-                LOGGER.warn("Failed to create pillager for pillage siege at {}", vec3, exception);
+                TakesAPillageMod.LOGGER.warn("Failed to create pillager for pillage siege at {}", vec3, exception);
                 return;
             }
             pillager.moveTo(vec3.x, vec3.y, vec3.z, serverLevel.random.nextFloat() * 360.0F, 0.0F);

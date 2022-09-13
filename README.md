@@ -21,18 +21,19 @@ Pillagers won't only sit idly waiting for a player with bad omen to attack a vil
 * Added a ravager horn, one of which is always dropped by slain ravagers. Its use will give the player the bad omen effect
 * Added the "Bastille Blues" music disc, by izofar
 * Added spawn eggs for each respective mob
+* Drinking milk no longer removes bad omen (configurable)
 
 ### Mobs
 * Added the Archer, a quick, hooded pillager that wields a bow
 * Added the Skirmisher, a very fast, axe-wielding pillager with limited visibility
 * Added the Legioner, an armored pillager equipped with sword and shield
-* Added the clay golem, a weaker but faster golem that is cheaper to summon
+* Added the Clay Golem, a weaker but faster golem that is cheaper to summon
 
 ### World
 * Pillager encampments now generate over flat terrain in the overworld
 * Bastilles now generate over flat terrain in the overworld
 * Pillage sieges may now happen in villages during nighttime
-* Natural iron golem spawning has been replaced by clay golems
+* Natural iron golem spawning has been replaced by clay golems (configurable)
 
 ### GUI
-* Added Advancements to be achieved by exploring 'It Take's a Pillage'
+* Added Advancements to be achieved by exploring *It Takes a Pillage*

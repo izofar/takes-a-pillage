@@ -22,7 +22,7 @@ public class MobFeature<T extends Mob> extends Feature<NoneFeatureConfiguration>
 
     public MobFeature(EntityType<? extends T> entityType) {
         super(NoneFeatureConfiguration.CODEC);
-        this.entityTypes = (() -> WeightedRandomList.create(new MobWeightedEntry(entityType, 1)));
+        this.entityTypes = () -> WeightedRandomList.create(new MobWeightedEntry(entityType, 1));
     }
 
     @Override

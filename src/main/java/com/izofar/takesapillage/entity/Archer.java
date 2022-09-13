@@ -6,7 +6,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -19,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.RangedBowAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
@@ -34,6 +34,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -42,12 +43,10 @@ import java.util.UUID;
 public class Archer extends AbstractIllager implements RangedAttackMob {
 
     private static final EntityDataAccessor<Optional<UUID>> DATA_TARGET_UUID = SynchedEntityData.defineId(Archer.class, EntityDataSerializers.OPTIONAL_UUID);
-
-    private final RangedBowAttackGoal<Archer> bowGoal = new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F);
+    private final TargetingConditions attackTargeting = TargetingConditions.forCombat().range(40.0D);
 
     public Archer(EntityType<? extends AbstractIllager> entitytype, Level world) {
         super(entitytype, world);
-        reassessWeaponGoal();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -63,6 +62,7 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new HoldGroundAttackGoal(this, 10.0F));
+        this.goalSelector.addGoal(3, new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 15.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 15.0F));
@@ -122,34 +122,8 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
         ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
         this.populateDefaultEquipmentSlots(difficulty);
         this.populateDefaultEquipmentEnchantments(difficulty);
-        this.reassessWeaponGoal();
         this.setCanPickUpLoot((this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier()));
         return data;
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        reassessWeaponGoal();
-    }
-
-    @Override
-    public void setItemSlot(EquipmentSlot slot, ItemStack itemstack) {
-        super.setItemSlot(slot, itemstack);
-        if (!this.level.isClientSide)
-            reassessWeaponGoal();
-    }
-
-    protected void reassessWeaponGoal() {
-        if (!this.level.isClientSide) {
-            this.goalSelector.removeGoal(this.bowGoal);
-            ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof BowItem));
-            if (itemstack.is(Items.BOW)) {
-                int i = this.level.getDifficulty() == Difficulty.HARD ? 15 : 25;
-                this.bowGoal.setMinAttackInterval(i);
-                this.goalSelector.addGoal(4, this.bowGoal);
-            }
-        }
     }
 
     @Nullable
@@ -157,7 +131,7 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
     public LivingEntity getTarget(){
         try{
             UUID uuid = this.getTargetUUID();
-            return uuid == null ? super.getTarget() : this.level.getPlayerByUUID(uuid);
+            return uuid == null ? super.getTarget() : Archer.getEntityByUUID(this.level, this, uuid);
         }catch(IllegalArgumentException exception){
             return super.getTarget();
         }
@@ -176,6 +150,17 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
 
     private void setTargetUUID(@Nullable UUID uuid){
         this.entityData.set(DATA_TARGET_UUID, Optional.ofNullable(uuid));
+    }
+
+    private static LivingEntity getEntityByUUID(Level level, Archer source, UUID uuid){
+        Player player;
+        if((player = level.getPlayerByUUID(uuid)) != null){
+            return player;
+        }else {
+            double inflation = source.getAttribute(Attributes.FOLLOW_RANGE).getBaseValue();
+            AABB aabb = source.getBoundingBox().inflate(inflation);
+            return level.getNearbyEntities(Mob.class, source.attackTargeting, source, aabb).stream().filter(livingEntity -> livingEntity.getUUID().equals(uuid)).findFirst().orElse(null);
+        }
     }
 
     @Override
