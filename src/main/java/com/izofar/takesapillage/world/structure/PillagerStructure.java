@@ -21,7 +21,7 @@ public class PillagerStructure extends StructureFeature<JigsawConfiguration> {
 
     private static final int CHUNK_SEARCH_RADIUS = 3;
     private static final int MAX_TERRAIN_RANGE = 10;
-
+    
     public PillagerStructure(Codec<JigsawConfiguration> codec) { super(codec, PillagerStructure::createPiecesGenerator, PostPlacementProcessor.NONE); }
 
     @Override
@@ -37,7 +37,8 @@ public class PillagerStructure extends StructureFeature<JigsawConfiguration> {
         return !(worldgenrandom.nextInt(5) != 0
                 || ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.VILLAGES, 10)
                 || ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.PILLAGER_OUTPOSTS, 10))
-                && ModStructureUtils.isRelativelyFlat(context, CHUNK_SEARCH_RADIUS, MAX_TERRAIN_RANGE);
+                && ModStructureUtils.isRelativelyFlat(context, CHUNK_SEARCH_RADIUS, MAX_TERRAIN_RANGE)
+                && ModStructureUtils.isOnLand(context, CHUNK_SEARCH_RADIUS);
     }
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {

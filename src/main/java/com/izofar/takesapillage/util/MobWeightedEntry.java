@@ -1,4 +1,4 @@
-package com.izofar.takesapillage.util.random;
+package com.izofar.takesapillage.util;
 
 import net.minecraft.util.random.Weight;
 import net.minecraft.util.random.WeightedEntry;

@@ -1,4 +1,4 @@
-package com.izofar.takesapillage.entity.ai.goal;
+package com.izofar.takesapillage.entity.ai;
 
 import com.izofar.takesapillage.entity.ShieldedMob;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +19,6 @@ import java.util.EnumSet;
 
 public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
 
-    private static final int DEFAULT_RANDOM_INTERVAL = 10;
     protected final Class<? extends LivingEntity> targetType;
     protected final T mob;
     private int shieldCoolDown;
@@ -80,7 +79,7 @@ public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
             case INACTIVE -> this.setDefaultCounters();
             case WARMUP -> this.shieldWarmup--;
             case ACTIVE -> {
-                if(this.mob.getTarget() == null) this.stop();
+                if(this.mob.getTarget() == null) return;
                 this.mob.getLookControl().setLookAt(this.mob.getTarget().getX(), this.mob.getTarget().getEyeY(), this.mob.getTarget().getZ(), 10.0F, (float) this.mob.getMaxHeadXRot());
                 this.mob.startUsingShield();
                 this.setDefaultCounters();

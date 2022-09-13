@@ -1,6 +1,6 @@
 package com.izofar.takesapillage.world.feature;
 
-import com.izofar.takesapillage.util.random.MobWeightedEntry;
+import com.izofar.takesapillage.util.MobWeightedEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.entity.EntityType;

@@ -14,7 +14,6 @@ public abstract class ModStructures {
     public static final DeferredRegister<StructureFeature<?>> MODDED_STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, TakesAPillageMod.MODID);
 
     public static final RegistryObject<StructureFeature<JigsawConfiguration>> PILLAGER_STRUCTURE = MODDED_STRUCTURES.register("pillager_structure", () -> new PillagerStructure(JigsawConfiguration.CODEC));
-    //public static final RegistryObject<StructureFeature<JigsawConfiguration>> BASTILLE = MODDED_STRUCTURES.register("bastille", () -> new BastilleStructure(JigsawConfiguration.CODEC));
 
     public static void register(IEventBus eventBus) {
         MODDED_STRUCTURES.register(eventBus);

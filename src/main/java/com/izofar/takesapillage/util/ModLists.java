@@ -3,7 +3,6 @@ package com.izofar.takesapillage.util;
 
 import com.google.common.collect.ImmutableList;
 import com.izofar.takesapillage.init.ModEntityTypes;
-import com.izofar.takesapillage.util.random.MobWeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;

@@ -1,7 +1,7 @@
 package com.izofar.takesapillage.entity;
 
 import com.izofar.takesapillage.entity.ai.ModIllagerAI;
-import com.izofar.takesapillage.entity.ai.goal.ShieldGoal;
+import com.izofar.takesapillage.entity.ai.ShieldGoal;
 import com.izofar.takesapillage.init.ModSoundEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

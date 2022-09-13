@@ -3,6 +3,8 @@ package com.izofar.takesapillage.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
@@ -15,12 +17,12 @@ public abstract class ModStructureUtils {
         return chunk.hasFeatureChunkInRange(feature, seed, inChunkPos.x, inChunkPos.z, radius);
     }
 
-    public static boolean isRelativelyFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunk_search_radius, int max_terrain_height) {
+    public static boolean isRelativelyFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius, int maxTerrainHightVariation) {
         ChunkPos chunkpos = context.chunkPos();
         int maxterrainheight = Integer.MIN_VALUE;
         int minterrainheight = Integer.MAX_VALUE;
-        for (int chunkX = chunkpos.x - chunk_search_radius; chunkX <= chunkpos.x + chunk_search_radius; chunkX++) {
-            for (int chunkZ = chunkpos.z - chunk_search_radius; chunkZ <= chunkpos.z + chunk_search_radius; chunkZ++) {
+        for (int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX++) {
+            for (int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ++) {
                 BlockPos blockpos = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
                 int height = context.chunkGenerator().getBaseHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
                 maxterrainheight = Math.max(maxterrainheight, height);
@@ -29,6 +31,22 @@ public abstract class ModStructureUtils {
                     return false;
             }
         }
-        return maxterrainheight - minterrainheight <= max_terrain_height;
+        return maxterrainheight - minterrainheight <= maxTerrainHightVariation;
+    }
+
+    public static boolean isOnLand(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius){
+        ChunkPos chunkpos = context.chunkPos();
+        for(int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX += chunkSearchRadius){
+            for(int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ += chunkSearchRadius) {
+                BlockPos centerOfChunk = chunkpos.getMiddleBlockPosition(0);
+                int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+                NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
+                BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
+
+                if (!topBlock.getFluidState().isEmpty())
+                    return false;
+            }
+        }
+        return true;
     }
 }
