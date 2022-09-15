@@ -5,10 +5,10 @@
       "item": "minecraft:deepslate_bricks"
     },
     "title": {
-      "translate": "advancements.bastille.title"
+      "translate": "advancements.takesapillage.bastille.title"
     },
     "description": {
-      "translate": "advancements.bastille.description"
+      "translate": "advancements.takesapillage.bastille.description"
     },
     "frame": "task",
     "show_toast": true,

@@ -5,6 +5,7 @@ import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.entity.ClayGolem;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -55,8 +56,11 @@ public abstract class ModEntityEvents {
 
     @SubscribeEvent
     public static void preventMilkFromRemovingBadOmen(MobEffectEvent event) {
-        if (event.getEffectInstance().getEffect().equals(MobEffects.BAD_OMEN)
-                && !ModCommonConfigs.REMOVE_BAD_OMEN.get())
+        MobEffectInstance effectInstance;
+        if ((effectInstance = event.getEffectInstance()) != null
+                && effectInstance.getEffect().equals(MobEffects.BAD_OMEN)
+                && !ModCommonConfigs.REMOVE_BAD_OMEN.get()) {
             event.getEffectInstance().setCurativeItems(ImmutableList.of());
+        }
     }
 }
