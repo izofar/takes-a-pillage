@@ -4,10 +4,10 @@
       "item": "minecraft:bell"
     },
     "title": {
-      "translate": "advancements.root.title"
+      "translate": "advancements.takesapillage.root.title"
     },
     "description": {
-      "translate": "advancements.root.description"
+      "translate": "advancements.takesapillage.root.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -16,22 +16,8 @@
     "background": "minecraft:textures/block/deepslate.png"
   },
   "criteria": {
-    "crafting_table": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:crafting_table"
-            ]
-          }
-        ]
-      }
+    "always": {
+      "trigger": "minecraft:tick"
     }
-  },
-  "requirements": [
-    [
-      "crafting_table"
-    ]
-  ]
+  }
 }

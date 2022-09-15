@@ -8,13 +8,13 @@
     ]
   },
   "entity.clay_golem.attack": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.attack",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.attack",
     "sounds": [
       "takesapillage:entity/clay_golem/throw"
     ]
   },
   "entity.clay_golem.damage": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.damage",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.damage",
     "sounds": [
       {
         "name": "takesapillage:entity/clay_golem/damage1",
@@ -37,13 +37,13 @@
     ]
   },
   "entity.clay_golem.death": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.death",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.death",
     "sounds": [
       "takesapillage:entity/clay_golem/death"
     ]
   },
   "entity.clay_golem.hurt": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.hurt",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.hurt",
     "sounds": [
       "takesapillage:entity/clay_golem/hit1",
       "takesapillage:entity/clay_golem/hit2",
@@ -52,13 +52,13 @@
     ]
   },
   "entity.clay_golem.repair": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.repair",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.repair",
     "sounds": [
       "takesapillage:entity/clay_golem/repair"
     ]
   },
   "entity.clay_golem.step": {
-    "subtitle": "takesapillage.subtitle.entity.clay_golem.step",
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.step",
     "sounds": [
       "takesapillage:entity/clay_golem/walk1",
       "takesapillage:entity/clay_golem/walk2",
@@ -74,21 +74,21 @@
       "takesapillage:entity/legioner/idle4",
       "takesapillage:entity/legioner/idle5"
     ],
-    "subtitle": "takesapillage.subtitle.entity.legioner.ambient"
+    "subtitle": "subtitle.takesapillage.entity.legioner.ambient"
   },
   "entity.legioner.celebrate": {
     "sounds": [
       "takesapillage:entity/legioner/celebrate1",
       "takesapillage:entity/legioner/celebrate2"
     ],
-    "subtitle": "takesapillage.subtitle.entity.legioner.celebrate"
+    "subtitle": "subtitle.takesapillage.entity.legioner.celebrate"
   },
   "entity.legioner.death": {
     "sounds": [
       "takesapillage:entity/legioner/death1",
       "takesapillage:entity/legioner/death2"
     ],
-    "subtitle": "takesapillage.subtitle.entity.legioner.death"
+    "subtitle": "subtitle.takesapillage.entity.legioner.death"
   },
   "entity.legioner.hurt": {
     "sounds": [
@@ -96,6 +96,6 @@
       "takesapillage:entity/legioner/hurt2",
       "takesapillage:entity/legioner/hurt3"
     ],
-    "subtitle": "takesapillage.subtitle.entity.legioner.hurt"
+    "subtitle": "subtitle.takesapillage.entity.legioner.hurt"
   }
 }

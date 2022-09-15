@@ -1,6 +1,7 @@
 package com.izofar.takesapillage.world.structure;
 
 import com.izofar.takesapillage.util.ModStructureUtils;
+import com.izofar.takesapillage.world.configurations.ModJigsawConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -19,9 +20,8 @@ import java.util.Optional;
 
 public class PillagerStructure extends StructureFeature<JigsawConfiguration> {
 
-    private static final int CHUNK_SEARCH_RADIUS = 3;
-    private static final int MAX_TERRAIN_RANGE = 10;
-    
+    private static final int STRUCTURE_SEARCH_RADIUS = 10;
+
     public PillagerStructure(Codec<JigsawConfiguration> codec) { super(codec, PillagerStructure::createPiecesGenerator, PostPlacementProcessor.NONE); }
 
     @Override
@@ -34,11 +34,11 @@ public class PillagerStructure extends StructureFeature<JigsawConfiguration> {
         int j = context.chunkPos().z >> 4;
         WorldgenRandom worldgenrandom = new WorldgenRandom(new LegacyRandomSource(0L));
         worldgenrandom.setSeed((i ^ j << 4) ^ context.seed());
-        return !(worldgenrandom.nextInt(5) != 0
-                || ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.VILLAGES, 10)
-                || ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.PILLAGER_OUTPOSTS, 10))
-                && ModStructureUtils.isRelativelyFlat(context, CHUNK_SEARCH_RADIUS, MAX_TERRAIN_RANGE)
-                && ModStructureUtils.isOnLand(context, CHUNK_SEARCH_RADIUS);
+        ModJigsawConfiguration config = ModJigsawConfiguration.getConfigFromJigsawContext(context);
+        return !ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.VILLAGES, STRUCTURE_SEARCH_RADIUS)
+                && !ModStructureUtils.isNearStructure(context.chunkGenerator(), context.seed(), context.chunkPos(), BuiltinStructureSets.PILLAGER_OUTPOSTS, STRUCTURE_SEARCH_RADIUS)
+                && ModStructureUtils.isRelativelyFlat(context, config.getTerrainSearchRadius(), config.getMaxTerrainRange())
+                && ModStructureUtils.isOnLand(context, config.getTerrainSearchRadius());
     }
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
@@ -46,4 +46,6 @@ public class PillagerStructure extends StructureFeature<JigsawConfiguration> {
         BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
         return JigsawPlacement.addPieces(context, PoolElementStructurePiece::new, blockpos, false, true);
     }
+
+
 }

@@ -17,36 +17,38 @@ public abstract class ModStructureUtils {
         return chunk.hasFeatureChunkInRange(feature, seed, inChunkPos.x, inChunkPos.z, radius);
     }
 
-    public static boolean isRelativelyFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius, int maxTerrainHightVariation) {
+    public static boolean isRelativelyFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius, int maxTerrainHeightVariation) {
         ChunkPos chunkpos = context.chunkPos();
-        int maxterrainheight = Integer.MIN_VALUE;
-        int minterrainheight = Integer.MAX_VALUE;
-        for (int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX++) {
-            for (int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ++) {
+        int maxTerrainHeight = Integer.MIN_VALUE;
+        int minTerrainHeight = Integer.MAX_VALUE;
+        for (int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX += chunkSearchRadius) {
+            for (int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ += chunkSearchRadius) {
                 BlockPos blockpos = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
                 int height = context.chunkGenerator().getBaseHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
-                maxterrainheight = Math.max(maxterrainheight, height);
-                minterrainheight = Math.min(minterrainheight, height);
+                maxTerrainHeight = Math.max(maxTerrainHeight, height);
+                minTerrainHeight = Math.min(minTerrainHeight, height);
                 if (!context.chunkGenerator().getBaseColumn(blockpos.getX(), blockpos.getZ(), context.heightAccessor()).getBlock(height).getFluidState().isEmpty())
+                    return false;
+                if(maxTerrainHeight - minTerrainHeight >= maxTerrainHeightVariation)
                     return false;
             }
         }
-        return maxterrainheight - minterrainheight <= maxTerrainHightVariation;
+        return maxTerrainHeight - minTerrainHeight <= maxTerrainHeightVariation;
     }
 
     public static boolean isOnLand(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius){
         ChunkPos chunkpos = context.chunkPos();
-        for(int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX += chunkSearchRadius){
-            for(int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ += chunkSearchRadius) {
-                BlockPos centerOfChunk = chunkpos.getMiddleBlockPosition(0);
-                int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
-                NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
-                BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
+        return isDryChunkCenter(context, new ChunkPos(chunkpos.x - chunkSearchRadius, chunkpos.z - chunkSearchRadius))
+                && isDryChunkCenter(context, new ChunkPos(chunkpos.x - chunkSearchRadius, chunkpos.z + chunkSearchRadius))
+                && isDryChunkCenter(context, new ChunkPos(chunkpos.x + chunkSearchRadius, chunkpos.z - chunkSearchRadius))
+                && isDryChunkCenter(context, new ChunkPos(chunkpos.x + chunkSearchRadius, chunkpos.z + chunkSearchRadius));
+    }
 
-                if (!topBlock.getFluidState().isEmpty())
-                    return false;
-            }
-        }
-        return true;
+    private static boolean isDryChunkCenter(PieceGeneratorSupplier.Context<JigsawConfiguration> context, ChunkPos chunkPos){
+        BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
+        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+        NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
+        BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
+        return topBlock.getFluidState().isEmpty();
     }
 }
