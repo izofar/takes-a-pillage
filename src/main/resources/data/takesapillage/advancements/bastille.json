@@ -2,7 +2,7 @@
   "parent": "takesapillage:root",
   "display": {
     "icon": {
-      "item": "minecraft:deepslate_bricks"
+      "item": "minecraft:cracked_stone_bricks"
     },
     "title": {
       "translate": "advancements.takesapillage.bastille.title"
@@ -19,7 +19,9 @@
     "in_bastille": {
       "trigger": "minecraft:location",
       "conditions": {
-        "feature": "takesapillage:bastille"
+        "location": {
+          "feature": "takesapillage:bastille"
+        }
       }
     }
   },

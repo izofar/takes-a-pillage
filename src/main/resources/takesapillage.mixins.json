@@ -1,12 +1,12 @@
 {
   "required": true,
   "package": "${project.group}.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
   "refmap": "${mod_id}.refmap.json",
   "mixins": [
     "ArcherArrowMixin"
   ],
   "client": [
   ],
-  "minVersion": "0.8.5"
+  "minVersion": "0.8"
 }

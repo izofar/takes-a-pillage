@@ -1,10 +1,10 @@
 package com.izofar.takesapillage.mixin;
 
-import com.izofar.takesapillage.entity.Archer;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import com.izofar.takesapillage.entity.ArcherEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.IndirectEntityDamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ArcherArrowMixin {
 
     @Inject(
-            method = "arrow(Lnet/minecraft/world/entity/projectile/AbstractArrow;Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/damagesource/DamageSource;",
+            method = "arrow(Lnet/minecraft/entity/projectile/AbstractArrowEntity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;",
             at = @At(value = "RETURN"),
             cancellable = true
     )
-    private static void takesapillage_arrow(AbstractArrow arrow, Entity entity, CallbackInfoReturnable<DamageSource> cir){
-        if(entity instanceof Archer)
+    private static void takesapillage_arrow(AbstractArrowEntity arrow, Entity entity, CallbackInfoReturnable<DamageSource> cir){
+        if(entity instanceof ArcherEntity)
             cir.setReturnValue((new IndirectEntityDamageSource("archer", arrow, entity)).setProjectile());
     }
 

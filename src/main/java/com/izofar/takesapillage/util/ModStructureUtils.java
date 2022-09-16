@@ -1,33 +1,52 @@
 package com.izofar.takesapillage.util;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
-import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.SharedSeedRandom;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ModStructureUtils {
 
-    public static boolean isNearStructure(ChunkGenerator chunk, long seed, ChunkPos inChunkPos, ResourceKey<StructureSet> feature, int radius) {
-        return chunk.hasFeatureChunkInRange(feature, seed, inChunkPos.x, inChunkPos.z, radius);
+    public static boolean isNearStructure(ChunkGenerator chunkGenerator, Structure<?> structure, long seed, SharedSeedRandom random, int chunkX, int chunkZ, int radius) {
+        StructureSeparationSettings structureseparationsettings = chunkGenerator.getSettings().getConfig(Structure.VILLAGE);
+        if (structureseparationsettings == null) {
+            return false;
+        } else {
+            for(int i = chunkX - radius; i <= chunkX + radius; ++i) {
+                for(int j = chunkZ - radius; j <= chunkZ + radius; ++j) {
+                    ChunkPos chunkpos = structure.getPotentialFeatureChunk(structureseparationsettings, seed, random, i, j);
+                    if (i == chunkpos.x && j == chunkpos.z) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 
-    public static boolean isRelativelyFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius, int maxTerrainHeightVariation) {
-        ChunkPos chunkpos = context.chunkPos();
+    public static boolean isRelativelyFlat(ChunkGenerator chunkGenerator, int chunkX, int chunkZ, int chunkSearchRadius, int maxTerrainHeightVariation) {
         int maxTerrainHeight = Integer.MIN_VALUE;
         int minTerrainHeight = Integer.MAX_VALUE;
-        for (int chunkX = chunkpos.x - chunkSearchRadius; chunkX <= chunkpos.x + chunkSearchRadius; chunkX += chunkSearchRadius) {
-            for (int chunkZ = chunkpos.z - chunkSearchRadius; chunkZ <= chunkpos.z + chunkSearchRadius; chunkZ += chunkSearchRadius) {
-                BlockPos blockpos = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
-                int height = context.chunkGenerator().getBaseHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+        for (int x = chunkX - chunkSearchRadius; x <= chunkX + chunkSearchRadius; x += chunkSearchRadius) {
+            for (int z = chunkZ - chunkSearchRadius; z <= chunkZ + chunkSearchRadius; z += chunkSearchRadius) {
+                BlockPos blockpos = new BlockPos((x << 4) + 7, 0, (z << 4) + 7);
+                int height = chunkGenerator.getFirstOccupiedHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
                 maxTerrainHeight = Math.max(maxTerrainHeight, height);
                 minTerrainHeight = Math.min(minTerrainHeight, height);
-                if (!context.chunkGenerator().getBaseColumn(blockpos.getX(), blockpos.getZ(), context.heightAccessor()).getBlock(height).getFluidState().isEmpty())
+                if (!chunkGenerator.getBaseColumn(blockpos.getX(), blockpos.getZ()).getBlockState(blockpos.above(height)).getFluidState().isEmpty())
                     return false;
                 if(maxTerrainHeight - minTerrainHeight >= maxTerrainHeightVariation)
                     return false;
@@ -36,19 +55,35 @@ public abstract class ModStructureUtils {
         return maxTerrainHeight - minTerrainHeight <= maxTerrainHeightVariation;
     }
 
-    public static boolean isOnLand(PieceGeneratorSupplier.Context<JigsawConfiguration> context, int chunkSearchRadius){
-        ChunkPos chunkpos = context.chunkPos();
-        return isDryChunkCenter(context, new ChunkPos(chunkpos.x - chunkSearchRadius, chunkpos.z - chunkSearchRadius))
-                && isDryChunkCenter(context, new ChunkPos(chunkpos.x - chunkSearchRadius, chunkpos.z + chunkSearchRadius))
-                && isDryChunkCenter(context, new ChunkPos(chunkpos.x + chunkSearchRadius, chunkpos.z - chunkSearchRadius))
-                && isDryChunkCenter(context, new ChunkPos(chunkpos.x + chunkSearchRadius, chunkpos.z + chunkSearchRadius));
+    public static boolean isOnLand(ChunkGenerator chunkGenerator, int chunkX, int chunkZ, int chunkSearchRadius){
+        return isDryChunkCenter(chunkGenerator, chunkX - chunkSearchRadius, chunkZ - chunkSearchRadius)
+                && isDryChunkCenter(chunkGenerator,chunkX - chunkSearchRadius, chunkZ + chunkSearchRadius)
+                && isDryChunkCenter(chunkGenerator,chunkX + chunkSearchRadius, chunkZ - chunkSearchRadius)
+                && isDryChunkCenter(chunkGenerator,chunkX + chunkSearchRadius, chunkZ + chunkSearchRadius);
     }
 
-    private static boolean isDryChunkCenter(PieceGeneratorSupplier.Context<JigsawConfiguration> context, ChunkPos chunkPos){
-        BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
-        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
-        NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
-        BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
+    private static boolean isDryChunkCenter(ChunkGenerator chunkGenerator, int chunkX, int chunkZ){
+        BlockPos centerOfChunk = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+        int landHeight = chunkGenerator.getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
+        IBlockReader columnOfBlocks = chunkGenerator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
+        BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));
         return topBlock.getFluidState().isEmpty();
+    }
+
+    public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformLand) {
+        Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
+
+        if(transformLand) Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder().addAll(Structure.NOISE_AFFECTING_FEATURES).add(structure).build();
+
+        DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder().putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
+
+        WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
+            Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig();
+            if(structureMap instanceof ImmutableMap){
+                Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
+                tempMap.put(structure, structureSeparationSettings);
+                settings.getValue().structureSettings().structureConfig = tempMap;
+            } else structureMap.put(structure, structureSeparationSettings);
+        });
     }
 }

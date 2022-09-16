@@ -1,33 +1,33 @@
 package com.izofar.takesapillage.client.model;
 
-import com.izofar.takesapillage.entity.Legioner;
-import net.minecraft.client.model.IllagerModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
+import com.izofar.takesapillage.entity.LegionerEntity;
+import net.minecraft.client.renderer.entity.model.IllagerModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.Hand;
+import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LegionerModel extends IllagerModel<Legioner> {
+public class LegionerModel extends IllagerModel<LegionerEntity> {
 
-    private final ModelPart rightArm;
-    private final ModelPart leftArm;
+    private final ModelRenderer rightArm;
+    private final ModelRenderer leftArm;
     
-    public LegionerModel(ModelPart root) {
-        super(root);
-        this.leftArm = root.getChild("left_arm");
-        this.rightArm = root.getChild("right_arm");
+    public LegionerModel() {
+        super(0, 0, 64, 64);
+        this.leftArm = new ModelRenderer(this);
+        this.rightArm = new ModelRenderer(this);
     }
 
     @Override
-    public void setupAnim(Legioner legioner, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(legioner, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        if(legioner.isAlive() && legioner.isUsingShield()){
-            boolean flag = legioner.getMainArm() == HumanoidArm.RIGHT;
-            if ((legioner.getShieldHand() == InteractionHand.MAIN_HAND) == flag) {
+    public void setupAnim(LegionerEntity legionerEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        super.setupAnim(legionerEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        if(legionerEntity.isAlive() && legionerEntity.isUsingShield()){
+            boolean flag = legionerEntity.getMainArm() == HandSide.RIGHT;
+            if ((legionerEntity.getShieldHand() == Hand.MAIN_HAND) == flag) {
                 this.poseRightArmShield();
-            } else if ((legioner.getShieldHand() == InteractionHand.OFF_HAND) == flag){
+            } else if ((legionerEntity.getShieldHand() == Hand.OFF_HAND) == flag){
                 this.poseLeftArmShield();
             }
         }

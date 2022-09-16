@@ -1,23 +1,23 @@
 package com.izofar.takesapillage.entity.ai;
 
 import com.izofar.takesapillage.entity.ShieldedMob;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.entity.EntityPredicate;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
+public class ShieldGoal<T extends MobEntity & ShieldedMob> extends Goal {
 
     protected final Class<? extends LivingEntity> targetType;
     protected final T mob;
@@ -27,13 +27,13 @@ public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
     private int shieldDelay;
     @Nullable
     protected LivingEntity target;
-    protected final TargetingConditions targetConditions;
+    protected final EntityPredicate targetConditions;
 
     public ShieldGoal(T mob, Class<? extends LivingEntity> targetType){
         this.mob = mob;
         this.targetType = targetType;
         this.setFlags(EnumSet.of(Goal.Flag.TARGET));
-        this.targetConditions = TargetingConditions.forCombat().range(this.getFollowDistance()).selector(null);
+        this.targetConditions = new EntityPredicate().range(this.getFollowDistance()).selector(null);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
     @Override
     public void start() {
         this.mob.setTarget(this.target);
-        this.shieldDelay = this.adjustedTickDelay(3 + this.mob.getRandom().nextInt(3));
-        this.shieldStagger = this.adjustedTickDelay(15 + this.mob.getRandom().nextInt(25));
+        this.shieldDelay = 3 + this.mob.getRandom().nextInt(3);
+        this.shieldStagger = 15 + this.mob.getRandom().nextInt(25);
         this.setDefaultCounters();
         super.start();
     }
@@ -76,24 +76,30 @@ public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
     @Override
     public void tick() {
         switch (this.getStage()) {
-            case INACTIVE -> this.setDefaultCounters();
-            case WARMUP -> this.shieldWarmup--;
-            case ACTIVE -> {
+            case INACTIVE:
+                this.setDefaultCounters();
+                break;
+            case WARMUP:
+                this.shieldWarmup--;
+                break;
+            case ACTIVE:
                 if(this.mob.getTarget() == null) return;
                 this.mob.getLookControl().setLookAt(this.mob.getTarget().getX(), this.mob.getTarget().getEyeY(), this.mob.getTarget().getZ(), 10.0F, (float) this.mob.getMaxHeadXRot());
                 this.mob.startUsingShield();
                 this.setDefaultCounters();
-            }
-            case COOLDOWN -> this.shieldCoolDown--;
+                break;
+            case COOLDOWN :
+                this.shieldCoolDown--;
+                break;
         }
     }
 
     private static boolean targetDrawnBow(LivingEntity target) {
         if(target == null) return false;
-        for(InteractionHand interactionhand : InteractionHand.values()) {
+        for(Hand interactionhand : Hand.values()) {
             ItemStack itemstack = target.getItemInHand(interactionhand);
-            boolean drawnBow = itemstack.is(Items.BOW) && target.isUsingItem();
-            boolean chargedCrossbow = itemstack.is(Items.CROSSBOW) && CrossbowItem.isCharged(itemstack);
+            boolean drawnBow = itemstack.getItem() == Items.BOW && target.isUsingItem();
+            boolean chargedCrossbow = itemstack.getItem() == Items.CROSSBOW && CrossbowItem.isCharged(itemstack);
             if (drawnBow || chargedCrossbow) {
                 return true;
             }
@@ -101,13 +107,13 @@ public class ShieldGoal<T extends Mob & ShieldedMob> extends Goal {
         return false;
     }
 
-    protected AABB getTargetSearchArea(double radius) {
+    protected AxisAlignedBB getTargetSearchArea(double radius) {
         return this.mob.getBoundingBox().inflate(radius, 4.0D, radius);
     }
 
     protected void findTarget() {
         LivingEntity potentialTarget;
-        if (this.targetType != Player.class && this.targetType != ServerPlayer.class) {
+        if (this.targetType != PlayerEntity.class && this.targetType != ServerPlayerEntity.class) {
             potentialTarget = this.mob.level.getNearestEntity(this.mob.level.getEntitiesOfClass(this.targetType, this.getTargetSearchArea(this.getFollowDistance()), (p_148152_) -> true), this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
         } else {
             potentialTarget = this.mob.level.getNearestPlayer(this.targetConditions, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());

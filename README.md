@@ -11,7 +11,7 @@ I will add a new structure, called pillager camps, that spawn in the overworld. 
 
 I will add bastilles to the overworld. These are firmer pillager establishments, where prisoners and pillaged loot are brought.
 
-These new structures need new enemies. Vanilla-themed variations on the pillager will patrol these structures, including the archer, skirmisher, and legioner.
+These new structures need new enemies. Vanilla-themed variations on the pillager will patrol these structures, including the archerEntity, skirmisherEntity, and legionerEntity.
 
 Pillagers won't only sit idly waiting for a player with bad omen to attack a village. Sieges on villages can occur any night.
 

@@ -1,6 +1,8 @@
 package com.izofar.takesapillage;
 
 import com.izofar.takesapillage.config.ModCommonConfigs;
+import com.izofar.takesapillage.event.ModBlockEvents;
+import com.izofar.takesapillage.event.ModEntityEvents;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.*;
 import com.izofar.takesapillage.util.ModLists;
@@ -32,12 +34,17 @@ public class TakesAPillageMod
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "takesapillage-common.toml");
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(ModBlockEvents.class);
+        MinecraftForge.EVENT_BUS.register(ModEntityEvents.class);
+        MinecraftForge.EVENT_BUS.register(ModWorldEvents.class);
     }
 
     private void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModLists.setupEntityLists();
             ModWorldEvents.addModdedRaiders();
+            ModConfiguredFeatures.registerConfiguredFeatures();
+            ModConfiguredStructures.registerConfiguredStructures();
         });
     }
 }

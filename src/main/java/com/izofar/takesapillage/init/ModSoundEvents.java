@@ -1,12 +1,12 @@
 package com.izofar.takesapillage.init;
 
 import com.izofar.takesapillage.TakesAPillageMod;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public abstract class ModSoundEvents {
     public static final DeferredRegister<SoundEvent> MODDED_SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, TakesAPillageMod.MODID);

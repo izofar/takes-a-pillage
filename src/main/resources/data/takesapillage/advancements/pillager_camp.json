@@ -19,7 +19,9 @@
     "in_pillager_camp": {
       "trigger": "minecraft:location",
       "conditions": {
-        "feature": "takesapillage:pillager_camp"
+        "location": {
+          "feature": "takesapillage:pillager_camp"
+        }
       }
     }
   },
