@@ -1,7 +1,0 @@
-{
-  "type": "takesapillage:pillager_structure",
-  "config": {
-    "start_pool": "takesapillage:pillager_camp/start_pool",
-    "size": 6
-  }
-}

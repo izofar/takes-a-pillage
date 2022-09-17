@@ -24,11 +24,13 @@ public class TakesAPillageMod
 
     public TakesAPillageMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         ModItems.register(eventBus);
         ModEntityTypes.register(eventBus);
         ModSoundEvents.register(eventBus);
         ModStructures.register(eventBus);
         ModFeatures.register(eventBus);
+
         eventBus.addListener(this::setup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "takesapillage-common.toml");
@@ -42,6 +44,7 @@ public class TakesAPillageMod
     private void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             ModLists.setupEntityLists();
+            ModStructures.setupStructures();
             ModWorldEvents.addModdedRaiders();
             ModConfiguredFeatures.registerConfiguredFeatures();
             ModConfiguredStructures.registerConfiguredStructures();

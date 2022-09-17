@@ -4,10 +4,10 @@
 			"rules": [
 				{
 					"output_state": {
-						"Name": "minecraft:cracked_deepslate_bricks"
+						"Name": "minecraft:cobblestone"
 					},
 					"input_predicate": {
-						"block": "minecraft:deepslate_bricks",
+						"block": "minecraft:stone",
 						"probability": 0.5,
 						"predicate_type": "minecraft:random_block_match"
 					},
@@ -17,10 +17,10 @@
 				},
 				{
 					"output_state": {
-						"Name": "minecraft:cracked_deepslate_tiles"
+						"Name": "minecraft:andesite"
 					},
 					"input_predicate": {
-						"block": "minecraft:deepslate_tiles",
+						"block": "minecraft:polished_andesite",
 						"probability": 0.5,
 						"predicate_type": "minecraft:random_block_match"
 					},
@@ -74,19 +74,6 @@
 					"input_predicate": {
 						"block": "minecraft:stone_bricks",
 						"probability": 0.1,
-						"predicate_type": "minecraft:random_block_match"
-					},
-					"location_predicate": {
-						"predicate_type": "minecraft:always_true"
-					}
-				},
-				{
-					"output_state": {
-						"Name": "minecraft:cracked_stone_bricks"
-					},
-					"input_predicate": {
-						"block": "minecraft:stone_bricks",
-						"probability": 0.25,
 						"predicate_type": "minecraft:random_block_match"
 					},
 					"location_predicate": {

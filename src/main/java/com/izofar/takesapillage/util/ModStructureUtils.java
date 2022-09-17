@@ -2,15 +2,20 @@ package com.izofar.takesapillage.util;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.izofar.takesapillage.TakesAPillageMod;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.registry.DynamicRegistries;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 
@@ -68,6 +73,10 @@ public abstract class ModStructureUtils {
         IBlockReader columnOfBlocks = chunkGenerator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
         BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));
         return topBlock.getFluidState().isEmpty();
+    }
+
+    public static VillageConfig createConfig(DynamicRegistries dynamicRegistryManager, String location, int size){
+        return new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(TakesAPillageMod.MODID, location)), size);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformLand) {

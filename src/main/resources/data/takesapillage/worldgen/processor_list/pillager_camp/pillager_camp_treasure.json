@@ -30,10 +30,10 @@
 				},
 				{
 					"output_state": {
-						"Name": "minecraft:deepslate_iron_ore"
+						"Name": "minecraft:iron_ore"
 					},
 					"input_predicate": {
-						"block": "minecraft:cobbled_deepslate",
+						"block": "minecraft:cobblestone",
 						"probability": 0.3,
 						"predicate_type": "minecraft:random_block_match"
 					},
@@ -43,11 +43,11 @@
 				},
 				{
 					"output_state": {
-						"Name": "minecraft:raw_iron_block"
+						"Name": "minecraft:iron_block"
 					},
 					"input_predicate": {
-						"block": "minecraft:cobbled_deepslate",
-						"probability": 0.15,
+						"block": "minecraft:cobblestone",
+						"probability": 0.05,
 						"predicate_type": "minecraft:random_block_match"
 					},
 					"location_predicate": {

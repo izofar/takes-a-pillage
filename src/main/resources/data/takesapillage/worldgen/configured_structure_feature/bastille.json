@@ -1,7 +1,0 @@
-{
-  "type": "takesapillage:pillager_structure",
-  "config": {
-    "start_pool": "takesapillage:bastille/start_pool",
-    "size": 3
-  }
-}

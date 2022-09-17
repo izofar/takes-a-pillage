@@ -7,7 +7,7 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
-public class ModConfiguredFeatures {
+public abstract class ModConfiguredFeatures {
 
     public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_ILLAGER = ModFeatures.MOB_FEATURE_ILLAGER.get().configured(IFeatureConfig.NONE);
     public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_RAVAGER = ModFeatures.MOB_FEATURE_RAVAGER.get().configured(IFeatureConfig.NONE);

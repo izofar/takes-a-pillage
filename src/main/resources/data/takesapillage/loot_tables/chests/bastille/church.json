@@ -257,7 +257,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:tinted_glass"
+          "name": "minecraft:glass"
         },
         {
           "type": "minecraft:item",
@@ -273,7 +273,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:cobbled_deepslate"
+          "name": "minecraft:cobblestone"
         }
       ]
     },
