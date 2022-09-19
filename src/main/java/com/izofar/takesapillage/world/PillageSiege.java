@@ -100,7 +100,7 @@ public class PillageSiege implements ISpecialSpawner {
         if (vec3 != null) {
             AbstractIllagerEntity pillager;
             try {
-                pillager = ModLists.get_pillager_siege_list().getRandom(serverLevel.random).get().create(serverLevel);
+                pillager = ModLists.getPillagerSiegeList().getRandom(serverLevel.random).get().create(serverLevel);
                 assert pillager != null;
                 pillager.setPersistenceRequired();
                 if (serverLevel.random.nextInt(6) < 1) {

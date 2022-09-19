@@ -2,7 +2,6 @@ package com.izofar.takesapillage.client.model;
 
 import com.izofar.takesapillage.entity.LegionerEntity;
 import net.minecraft.client.renderer.entity.model.IllagerModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,13 +10,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LegionerModel extends IllagerModel<LegionerEntity> {
 
-    private final ModelRenderer rightArm;
-    private final ModelRenderer leftArm;
-    
     public LegionerModel() {
         super(0, 0, 64, 64);
-        this.leftArm = new ModelRenderer(this);
-        this.rightArm = new ModelRenderer(this);
     }
 
     @Override

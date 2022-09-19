@@ -25,12 +25,10 @@ import java.util.Map;
 public abstract class ModStructureUtils {
 
     public static boolean isNearStructure(ChunkGenerator chunkGenerator, Structure<?> structure, long seed, SharedSeedRandom random, int chunkX, int chunkZ, int radius) {
-        StructureSeparationSettings structureseparationsettings = chunkGenerator.getSettings().getConfig(Structure.VILLAGE);
-        if (structureseparationsettings == null) {
-            return false;
-        } else {
-            for(int i = chunkX - radius; i <= chunkX + radius; ++i) {
-                for(int j = chunkZ - radius; j <= chunkZ + radius; ++j) {
+        StructureSeparationSettings structureseparationsettings = chunkGenerator.getSettings().getConfig(structure);
+        if (structureseparationsettings != null) {
+            for (int i = chunkX - radius; i <= chunkX + radius; ++i) {
+                for (int j = chunkZ - radius; j <= chunkZ + radius; ++j) {
                     ChunkPos chunkpos = structure.getPotentialFeatureChunk(structureseparationsettings, seed, random, i, j);
                     if (i == chunkpos.x && j == chunkpos.z) {
                         return true;
@@ -38,8 +36,8 @@ public abstract class ModStructureUtils {
                 }
             }
 
-            return false;
         }
+        return false;
     }
 
     public static boolean isRelativelyFlat(ChunkGenerator chunkGenerator, int chunkX, int chunkZ, int chunkSearchRadius, int maxTerrainHeightVariation) {

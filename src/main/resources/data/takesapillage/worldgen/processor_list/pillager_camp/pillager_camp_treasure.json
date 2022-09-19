@@ -4,7 +4,10 @@
 			"rules": [
 				{
 					"output_state": {
-						"Name": "minecraft:grass_block"
+						"Name": "minecraft:grass_block",
+						"Properties": {
+							"snowy": "false"
+						}
 					},
 					"input_predicate": {
 						"block": "minecraft:dirt",

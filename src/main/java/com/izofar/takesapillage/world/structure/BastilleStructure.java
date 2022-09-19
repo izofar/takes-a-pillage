@@ -8,13 +8,16 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
 
 public class BastilleStructure extends PillagerStructure {
+
+    public static final StructureSeparationSettings SEPARATION_SETTINGS = new StructureSeparationSettings(16, 4, 789775274);
 
     @Override
     protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig){
         return super.isFeatureChunk(chunkGenerator, biomeSource, seed, chunkRandom, chunkX, chunkZ, biome, chunkPos, featureConfig)
-            && !ModStructureUtils.isNearStructure(chunkGenerator, ModStructures.PILLAGER_CAMP.get(), seed, chunkRandom, chunkX, chunkZ, STRUCTURE_SEARCH_RADIUS);
+            && !ModStructureUtils.isNearStructure(chunkGenerator, ModStructures.PILLAGER_CAMP.get(), seed, chunkRandom, chunkX, chunkZ, 4);
     }
 
     @Override

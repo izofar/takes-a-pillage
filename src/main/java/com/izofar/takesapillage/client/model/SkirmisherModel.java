@@ -24,6 +24,9 @@ public class SkirmisherModel extends SegmentedModel<SkirmisherEntity> implements
     private final ModelRenderer right_leg;
 
     public SkirmisherModel() {
+        this.texHeight = 64;
+        this.texWidth = 64;
+
         this.head = new ModelRenderer(this);
         this.hat = new ModelRenderer(this);
         this.nose = new ModelRenderer(this);

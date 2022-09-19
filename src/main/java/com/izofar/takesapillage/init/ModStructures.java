@@ -2,8 +2,8 @@ package com.izofar.takesapillage.init;
 
 import com.izofar.takesapillage.TakesAPillageMod;
 import com.izofar.takesapillage.util.ModStructureUtils;
+import com.izofar.takesapillage.world.structure.BastilleStructure;
 import com.izofar.takesapillage.world.structure.PillagerCampStructure;
-import com.izofar.takesapillage.world.structure.PillagerStructure;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,7 +15,7 @@ public abstract class ModStructures {
 
     public static final DeferredRegister<Structure<?>> MODDED_STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, TakesAPillageMod.MODID);
 
-    //public static final RegistryObject<Structure<NoFeatureConfig>> BASTILLE = MODDED_STRUCTURES.register("bastille", BastilleStructure::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> BASTILLE = MODDED_STRUCTURES.register("bastille", BastilleStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> PILLAGER_CAMP = MODDED_STRUCTURES.register("pillager_camp", PillagerCampStructure::new);
 
     public static void register(IEventBus eventBus) {
@@ -23,7 +23,7 @@ public abstract class ModStructures {
     }
 
     public static void setupStructures() {
-        //ModStructureUtils.setupMapSpacingAndLand(BASTILLE.get(), PillagerStructure.SEPARATION_SETTINGS, true);
-        ModStructureUtils.setupMapSpacingAndLand(PILLAGER_CAMP.get(), PillagerStructure.SEPARATION_SETTINGS, true);
+        ModStructureUtils.setupMapSpacingAndLand(BASTILLE.get(), BastilleStructure.SEPARATION_SETTINGS, true);
+        ModStructureUtils.setupMapSpacingAndLand(PILLAGER_CAMP.get(), PillagerCampStructure.SEPARATION_SETTINGS, true);
     }
 }

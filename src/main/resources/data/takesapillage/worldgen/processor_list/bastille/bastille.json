@@ -4,19 +4,6 @@
 			"rules": [
 				{
 					"output_state": {
-						"Name": "minecraft:cobblestone"
-					},
-					"input_predicate": {
-						"block": "minecraft:stone",
-						"probability": 0.5,
-						"predicate_type": "minecraft:random_block_match"
-					},
-					"location_predicate": {
-						"predicate_type": "minecraft:always_true"
-					}
-				},
-				{
-					"output_state": {
 						"Name": "minecraft:andesite"
 					},
 					"input_predicate": {
@@ -82,7 +69,23 @@
 				},
 				{
 					"output_state": {
-						"Name": "minecraft:grass_block"
+						"Name": "minecraft:cracked_stone_bricks"
+					},
+					"input_predicate": {
+						"block": "minecraft:stone_bricks",
+						"probability": 0.25,
+						"predicate_type": "minecraft:random_block_match"
+					},
+					"location_predicate": {
+						"predicate_type": "minecraft:always_true"
+					}
+				},
+				{
+					"output_state": {
+						"Name": "minecraft:grass_block",
+						"Properties": {
+							"snowy": "false"
+						}
 					},
 					"input_predicate": {
 						"block": "minecraft:dirt",

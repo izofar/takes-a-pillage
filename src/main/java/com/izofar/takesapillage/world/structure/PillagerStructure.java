@@ -1,15 +1,13 @@
 package com.izofar.takesapillage.world.structure;
 
 import com.google.common.collect.ImmutableList;
-import com.izofar.takesapillage.TakesAPillageMod;
 import com.izofar.takesapillage.util.ModStructureUtils;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -18,17 +16,16 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
 
 import java.util.List;
 
 public abstract class PillagerStructure extends Structure<NoFeatureConfig> {
 
     protected static final int STRUCTURE_SEARCH_RADIUS = 10;
-    public static final StructureSeparationSettings SEPARATION_SETTINGS = new StructureSeparationSettings(16, 4, 10520565);
+
     public static final List<String> VANILLA_SPAWNABLE_BIOMES = ImmutableList.of(
             "minecraft:plains",
             "minecraft:snowy_plains",
@@ -61,7 +58,9 @@ public abstract class PillagerStructure extends Structure<NoFeatureConfig> {
             "byg:rose_fields"
     );
 
-    public PillagerStructure() { super(NoFeatureConfig.CODEC); }
+    public PillagerStructure() {
+        super(NoFeatureConfig.CODEC);
+    }
 
     @Override
     public IStartFactory<NoFeatureConfig> getStartFactory(){
@@ -108,8 +107,8 @@ public abstract class PillagerStructure extends Structure<NoFeatureConfig> {
 
             JigsawManager.addPieces(
                     dynamicRegistryManager,
-                    //ModStructureUtils.createConfig(dynamicRegistryManager, this.startPool, this.size),
-                    new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(TakesAPillageMod.MODID, "pillager_camp/start_pool")), 6),
+                    ModStructureUtils.createConfig(dynamicRegistryManager, this.startPool, this.size),
+                    //new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(TakesAPillageMod.MODID, "pillager_camp/start_pool")), 6),
                     AbstractVillagePiece::new,
                     chunkGenerator,
                     templateManagerIn,
@@ -118,6 +117,15 @@ public abstract class PillagerStructure extends Structure<NoFeatureConfig> {
                     this.random,
                     false,
                     true);
+
+            Vector3i structureCenter = this.pieces.get(0).getBoundingBox().getCenter();
+            int xOffset = centerPos.getX() - structureCenter.getX();
+            int zOffset = centerPos.getZ() - structureCenter.getZ();
+            for(StructurePiece structurePiece : this.pieces){
+                structurePiece.move(xOffset, 0, zOffset);
+            }
+
+            this.calculateBoundingBox();
         }
     }
 

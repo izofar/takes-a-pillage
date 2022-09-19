@@ -1,7 +1,11 @@
 package com.izofar.takesapillage.world.structure;
 
 
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
+
 public class PillagerCampStructure extends PillagerStructure {
+
+    public static final StructureSeparationSettings SEPARATION_SETTINGS = new StructureSeparationSettings(16, 4, 10520565);
 
     @Override
     protected int getTerrainSearchRadius() {

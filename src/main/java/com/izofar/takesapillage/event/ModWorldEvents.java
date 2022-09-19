@@ -66,7 +66,7 @@ public abstract class ModWorldEvents {
     }
 
     private static void addPillagerStructures(final BiomeLoadingEvent event){
-        //event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_BASTILLE);
+        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_BASTILLE);
         event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_PILLAGER_CAMP);
     }
 
@@ -79,7 +79,7 @@ public abstract class ModWorldEvents {
             if (chunkGenerator instanceof FlatChunkGenerator && serverWorld.dimension().equals(World.OVERWORLD)) return;
 
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
-            //tempMap.putIfAbsent(ModStructures.BASTILLE.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructures.BASTILLE.get()));
+            tempMap.putIfAbsent(ModStructures.BASTILLE.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructures.BASTILLE.get()));
             tempMap.putIfAbsent(ModStructures.PILLAGER_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructures.PILLAGER_CAMP.get()));
             chunkGenerator.getSettings().structureConfig = tempMap;
         }

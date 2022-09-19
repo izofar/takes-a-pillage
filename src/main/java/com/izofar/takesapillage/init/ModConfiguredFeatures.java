@@ -9,13 +9,13 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public abstract class ModConfiguredFeatures {
 
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_ILLAGER = ModFeatures.MOB_FEATURE_ILLAGER.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_RAVAGER = ModFeatures.MOB_FEATURE_RAVAGER.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_LIVESTOCK = ModFeatures.MOB_FEATURE_LIVESTOCK.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_PRISONER = ModFeatures.MOB_FEATURE_PRISONER.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_ARCHER = ModFeatures.MOB_FEATURE_ARCHER.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_SOLDIER = ModFeatures.MOB_FEATURE_SOLDIER.get().configured(IFeatureConfig.NONE);
-    public static ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_CAPTIVE = ModFeatures.MOB_FEATURE_CAPTIVE.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_ILLAGER = ModFeatures.MOB_FEATURE_ILLAGER.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_RAVAGER = ModFeatures.MOB_FEATURE_RAVAGER.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_LIVESTOCK = ModFeatures.MOB_FEATURE_LIVESTOCK.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_PRISONER = ModFeatures.MOB_FEATURE_PRISONER.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_ARCHER = ModFeatures.MOB_FEATURE_ARCHER.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_SOLDIER = ModFeatures.MOB_FEATURE_SOLDIER.get().configured(IFeatureConfig.NONE);
+    public static final ConfiguredFeature<?, ?> CONFIGURED_MOB_FEATURE_CAPTIVE = ModFeatures.MOB_FEATURE_CAPTIVE.get().configured(IFeatureConfig.NONE);
 
     public static void registerConfiguredFeatures(){
         Registry<ConfiguredFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_FEATURE;
