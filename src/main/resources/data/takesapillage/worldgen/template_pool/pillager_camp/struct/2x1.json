@@ -1,6 +1,6 @@
 {
 	"name": "takesapillage:pillager_camp/struct/2x1",
-	"fallback": "takesapillage:pillager_camp/struct/1x1",
+	"fallback": "minecraft:empty",
 	"elements": [
 		{
 			"weight": 3,
