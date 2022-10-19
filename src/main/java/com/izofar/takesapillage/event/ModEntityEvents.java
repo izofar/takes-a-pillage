@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.entity.ClayGolemEntity;
 import com.izofar.takesapillage.init.ModEntityTypes;
+import com.izofar.takesapillage.util.IMobRememberSpawnReason;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
@@ -28,6 +30,7 @@ public abstract class ModEntityEvents {
         if (entity instanceof IronGolemEntity
                 && entity.getClass() == IronGolemEntity.class
                 && event.getWorld() instanceof ServerWorld
+                && ((IMobRememberSpawnReason)entity).getMobSpawnType() != SpawnReason.COMMAND
                 && !((IronGolemEntity) entity).isPlayerCreated()) {
             ClayGolemEntity clayGolemEntity = ModEntityTypes.CLAY_GOLEM.get().create(event.getWorld());
             if(clayGolemEntity == null) return;
