@@ -1,0 +1,44 @@
+{
+
+	"item.takesapillage.archer_spawn_egg": "远弓手刷怪蛋",
+	"item.takesapillage.skirmisher_spawn_egg": "突击手刷怪蛋",
+	"item.takesapillage.legioner_spawn_egg": "重装军刷怪蛋",
+
+	"item.takesapillage.ravager_horn": "劫掠兽兽角",
+	"item.takesapillage.bastille_blues_music_disc": "音乐唱片",
+	"item.takesapillage.bastille_blues_music_disc.desc": "izofar - Bastille Blues",
+
+	"entity.takesapillage.clay_golem": "黏土傀儡",
+	"entity.takesapillage.archer": "远弓手",
+	"entity.takesapillage.skirmisher": "突袭者",
+	"entity.takesapillage.legioner": "重装军",
+
+	"subtitle.takesapillage.entity.clay_golem.attack": "黏土傀儡：攻击",
+	"subtitle.takesapillage.entity.clay_golem.damage": "黏土傀儡：受损",
+	"subtitle.takesapillage.entity.clay_golem.death": "黏土傀儡：死亡",
+	"subtitle.takesapillage.entity.clay_golem.hurt": "黏土傀儡：受伤",
+	"subtitle.takesapillage.entity.clay_golem.repair": "黏土傀儡：修复",
+	"subtitle.takesapillage.entity.clay_golem.step": "黏土傀儡：脚步声",
+
+	"subtitle.takesapillage.entity.legioner.ambient": "重装军：低语",
+	"subtitle.takesapillage.entity.legioner.celebrate": "重装军：欢呼",
+	"subtitle.takesapillage.entity.legioner.death": "重装军：死亡",
+	"subtitle.takesapillage.entity.legioner.hurt": "重装军：受伤",
+
+	"advancements.takesapillage.root.title": "集群氓之力",
+	"advancements.takesapillage.root.description": "在主世界探索新结构吧！",
+	"advancements.takesapillage.bastille.title": "Eh-eh-oh, eh-oh",
+	"advancements.takesapillage.bastille.description": "发现一座巴士底堡",
+	"advancements.takesapillage.pillager_camp.title": "篝火之歌",
+	"advancements.takesapillage.pillager_camp.description": "发现一处掠夺者营寨",
+
+	"death.attack.clay_golem": "%1$s被%2$s打死了",
+	"death.attack.clay_golem.item": "%1$s被%2$s用%3$s打死了",
+	"death.attack.archer": "%1$s被%2$s狙杀了",
+	"death.attack.archer.item": "%1$s被%2$s用%3$s狙杀了",
+	"death.attack.skirmisher": "%1$s被%2$s砍成了碎片",
+	"death.attack.skirmisher.item": "%1$s被%2$s用%3$s砍成了碎片",
+	"death.attack.legioner": "%1$s被%2$s击杀了",
+	"death.attack.legioner.item": "%1$s被%2$s用%3$s击杀了"
+
+}
