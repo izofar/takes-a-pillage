@@ -12,7 +12,7 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 
 public class BastilleStructure extends PillagerStructure {
 
-    public static final StructureSeparationSettings SEPARATION_SETTINGS = new StructureSeparationSettings(16, 4, 789775274);
+    public static final StructureSeparationSettings SEPARATION_SETTINGS = new StructureSeparationSettings(32, 12, 789775274);
 
     @Override
     protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig){

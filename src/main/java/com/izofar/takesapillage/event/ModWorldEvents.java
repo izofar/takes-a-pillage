@@ -1,5 +1,6 @@
 package com.izofar.takesapillage.event;
 
+import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.init.ModConfiguredStructures;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import com.izofar.takesapillage.init.ModStructures;
@@ -34,6 +35,7 @@ public abstract class ModWorldEvents {
         World level = event.world;
         if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
                 && level instanceof ServerWorld
+                && ModCommonConfigs.DO_PILLAGE_SIEGES.get()
                 && level.dimension() == World.OVERWORLD) {
             PILLAGE_SIEGE.tick((ServerWorld) level, true, false);
         }

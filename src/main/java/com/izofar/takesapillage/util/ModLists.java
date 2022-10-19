@@ -1,24 +1,27 @@
 package com.izofar.takesapillage.util;
 
 
+import com.google.common.collect.ImmutableMap;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import com.izofar.takesapillage.util.random.WeightedEntry;
 import com.izofar.takesapillage.util.random.WeightedRandomList;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.brain.sensor.VillagerHostilesSensor;
 import net.minecraft.entity.monster.AbstractIllagerEntity;
+import net.minecraft.entity.monster.AbstractRaiderEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 
 import java.util.function.Supplier;
 
 public abstract class ModLists {
 
-    private static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> PILLAGER_CAMP_LIST;
+    private static WeightedRandomList<Supplier<EntityType<? extends AbstractRaiderEntity>>> PILLAGER_CAMP_LIST;
     private static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> PILLAGER_SIEGE_LIST;
     private static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> RANGED_ILLAGER_LIST;
     private static WeightedRandomList<Supplier<EntityType<? extends AnimalEntity>>> LIVESTOCK_LIST;
     private static WeightedRandomList<Supplier<EntityType<? extends MobEntity>>> PRISONER_LIST;
-    private static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> BASTILLE_LIST;
+    private static WeightedRandomList<Supplier<EntityType<? extends AbstractRaiderEntity>>> BASTILLE_LIST;
     private static WeightedRandomList<Supplier<EntityType<? extends MobEntity>>> CAPTIVE_LIST;
 
     public static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> getPillagerSiegeList() {
@@ -33,13 +36,14 @@ public abstract class ModLists {
         return PILLAGER_SIEGE_LIST;
     }
 
-    public static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> getPillagerCampList() {
+    public static WeightedRandomList<Supplier<EntityType<? extends AbstractRaiderEntity>>> getPillagerCampList() {
         if(PILLAGER_CAMP_LIST == null)
             PILLAGER_CAMP_LIST = WeightedRandomList.create(
                     new WeightedEntry<>(() -> EntityType.PILLAGER, 15),
                     new WeightedEntry<>(ModEntityTypes.SKIRMISHER::get, 12),
                     new WeightedEntry<>(ModEntityTypes.ARCHER::get, 8),
                     new WeightedEntry<>(() -> EntityType.VINDICATOR, 5),
+                    new WeightedEntry<>(() -> EntityType.WITCH, 3),
                     new WeightedEntry<>(() -> EntityType.EVOKER, 1)
             );
         return PILLAGER_CAMP_LIST;
@@ -76,7 +80,7 @@ public abstract class ModLists {
         return PRISONER_LIST;
     }
 
-    public static WeightedRandomList<Supplier<EntityType<? extends AbstractIllagerEntity>>> getBastilleList() {
+    public static WeightedRandomList<Supplier<EntityType<? extends AbstractRaiderEntity>>> getBastilleList() {
         if(BASTILLE_LIST == null)
             BASTILLE_LIST = WeightedRandomList.create(
                     new WeightedEntry<>(ModEntityTypes.LEGIONER::get, 15),
@@ -84,6 +88,7 @@ public abstract class ModLists {
                     new WeightedEntry<>(ModEntityTypes.ARCHER::get, 8),
                     new WeightedEntry<>(() -> EntityType.PILLAGER, 7),
                     new WeightedEntry<>(() -> EntityType.VINDICATOR, 5),
+                    new WeightedEntry<>(() -> EntityType.WITCH, 4),
                     new WeightedEntry<>(() -> EntityType.EVOKER, 1)
             );
         return BASTILLE_LIST;
@@ -97,5 +102,24 @@ public abstract class ModLists {
                     new WeightedEntry<>(() -> EntityType.IRON_GOLEM, 2)
             );
         return CAPTIVE_LIST;
+    }
+
+    public static void resetVillagerHostiles(){
+        VillagerHostilesSensor.ACCEPTABLE_DISTANCE_FROM_HOSTILES = ImmutableMap.<EntityType<?>, Float>builder()
+                .put(EntityType.DROWNED, 8.0F)
+                .put(EntityType.EVOKER, 12.0F)
+                .put(EntityType.HUSK, 8.0F)
+                .put(EntityType.ILLUSIONER, 12.0F)
+                .put(EntityType.PILLAGER, 15.0F)
+                .put(ModEntityTypes.ARCHER.get(), 15.0F)
+                .put(ModEntityTypes.SKIRMISHER.get(), 15.0F)
+                .put(ModEntityTypes.LEGIONER.get(), 15.0F)
+                .put(EntityType.RAVAGER, 12.0F)
+                .put(EntityType.VEX, 8.0F)
+                .put(EntityType.VINDICATOR, 10.0F)
+                .put(EntityType.ZOGLIN, 10.0F)
+                .put(EntityType.ZOMBIE, 8.0F)
+                .put(EntityType.ZOMBIE_VILLAGER, 8.0F)
+            .build();
     }
 }

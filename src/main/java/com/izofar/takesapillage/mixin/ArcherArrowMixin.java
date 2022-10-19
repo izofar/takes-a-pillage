@@ -14,9 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ArcherArrowMixin {
 
     @Inject(
-            method = "arrow(Lnet/minecraft/entity/projectile/AbstractArrowEntity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;",
-            at = @At(value = "RETURN"),
-            cancellable = true
+        method = "arrow(Lnet/minecraft/entity/projectile/AbstractArrowEntity;Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/DamageSource;",
+        at = @At(value = "RETURN"),
+        cancellable = true
     )
     private static void takesapillage_arrow(AbstractArrowEntity arrow, Entity entity, CallbackInfoReturnable<DamageSource> cir){
         if(entity instanceof ArcherEntity)

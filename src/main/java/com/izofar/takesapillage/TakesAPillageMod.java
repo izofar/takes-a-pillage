@@ -5,6 +5,7 @@ import com.izofar.takesapillage.event.ModBlockEvents;
 import com.izofar.takesapillage.event.ModEntityEvents;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.*;
+import com.izofar.takesapillage.util.ModLists;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -42,6 +43,7 @@ public class TakesAPillageMod
 
     private void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ModLists.resetVillagerHostiles();
             ModStructures.setupStructures();
             ModWorldEvents.addModdedRaiders();
             ModConfiguredFeatures.registerConfiguredFeatures();

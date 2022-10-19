@@ -118,6 +118,17 @@ public class ArcherEntity extends AbstractIllagerEntity implements IRangedAttack
         return data;
     }
 
+    @Override
+    public boolean isAlliedTo(Entity entity) {
+        if (super.isAlliedTo(entity)) {
+            return true;
+        } else if (entity instanceof LivingEntity && ((LivingEntity) entity).getMobType() == CreatureAttribute.ILLAGER) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        } else {
+            return false;
+        }
+    }
+
     @Nullable
     @Override
     public LivingEntity getTarget(){

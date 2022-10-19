@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "${mod_id}.refmap.json",
   "mixins": [
-    "ArcherArrowMixin"
+    "ArcherArrowMixin",
+    "MobRememberSpawnReasonMixin",
+    "ClayGolemSensorMixin"
   ],
   "client": [
   ],

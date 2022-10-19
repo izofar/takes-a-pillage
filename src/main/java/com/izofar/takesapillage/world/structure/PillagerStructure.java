@@ -39,7 +39,6 @@ public abstract class PillagerStructure extends Structure<NoFeatureConfig> {
             "biomesoplenty:dryland",
             "biomesoplenty:fir_clearing",
             "biomesoplenty:grassland",
-            "biomesoplenty:lavender_field",
             "biomesoplenty:lush_savanna",
             "biomesoplenty:pasture",
             "biomesoplenty:prairie",
