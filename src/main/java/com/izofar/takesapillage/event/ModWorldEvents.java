@@ -15,11 +15,10 @@ public abstract class ModWorldEvents {
 
     @SubscribeEvent
     public static void onSpecialSpawn(TickEvent.LevelTickEvent event) {
-        Level level = event.level;
-        if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
-                && level instanceof ServerLevel serverWorld
-                && serverWorld.dimension() == Level.OVERWORLD) {
-            PILLAGE_SIEGE.tick(serverWorld, true, false);
+        if (event.level instanceof ServerLevel serverLevel
+                && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
+                && serverLevel.dimension() == Level.OVERWORLD) {
+            PILLAGE_SIEGE.tick(serverLevel, true, false);
         }
     }
 

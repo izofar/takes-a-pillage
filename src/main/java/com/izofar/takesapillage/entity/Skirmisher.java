@@ -91,7 +91,7 @@ public class Skirmisher extends AbstractIllager {
     @Override
     public boolean isAlliedTo(Entity entity) {
         if (super.isAlliedTo(entity)) return true;
-        if (entity instanceof LivingEntity && ((LivingEntity)entity).getMobType() == MobType.ILLAGER) return (this.getTeam() == null && entity.getTeam() == null);
+        if (entity instanceof LivingEntity livingEntity && livingEntity.getMobType() == MobType.ILLAGER) return (this.getTeam() == null && entity.getTeam() == null);
         return false;
     }
 

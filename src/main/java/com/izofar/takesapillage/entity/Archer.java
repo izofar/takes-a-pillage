@@ -128,6 +128,17 @@ public class Archer extends AbstractIllager implements RangedAttackMob {
         return data;
     }
 
+    @Override
+    public boolean isAlliedTo(Entity entity) {
+        if (super.isAlliedTo(entity)) {
+            return true;
+        } else if (entity instanceof LivingEntity livingEntity && livingEntity.getMobType() == MobType.ILLAGER) {
+            return this.getTeam() == null && entity.getTeam() == null;
+        } else {
+            return false;
+        }
+    }
+
     @Nullable
     @Override
     public LivingEntity getTarget(){

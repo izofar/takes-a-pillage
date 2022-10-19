@@ -27,10 +27,6 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:lavender_field",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:lush_savanna",
       "required": false
     },

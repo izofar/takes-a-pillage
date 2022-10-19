@@ -1,6 +1,7 @@
 package com.izofar.takesapillage.world;
 
 import com.izofar.takesapillage.TakesAPillageMod;
+import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.util.ModLists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +34,7 @@ public class PillageSiege implements CustomSpawner {
 
     @Override
     public int tick(ServerLevel serverlevel, boolean spawnEnemies, boolean spawnFriendlies) {
-        if (!serverlevel.isDay() && spawnEnemies) {
+        if (!serverlevel.isDay() && spawnEnemies && ModCommonConfigs.DO_PILLAGE_SIEGES.get()) {
             float f = serverlevel.getTimeOfDay(0.0F);
             if ((double)f == 0.5D) {
                 this.siegeState = serverlevel.random.nextInt(10) == 0 ? State.SIEGE_TONIGHT : State.SIEGE_DONE;
