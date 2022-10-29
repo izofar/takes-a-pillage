@@ -1,0 +1,48 @@
+{
+
+	"item.takesapillage.archer_spawn_egg": "Archer Spawn Egg",
+	"item.takesapillage.skirmisher_spawn_egg": "Skirmisher Spawn Egg",
+	"item.takesapillage.legioner_spawn_egg": "Legioner Spawn Egg",
+
+	"item.takesapillage.ravager_horn": "Ravager Horn",
+	"item.takesapillage.bastille_blues_music_disc": "Music Disc",
+	"item.takesapillage.bastille_blues_music_disc.desc": "izofar - Bastille Blues",
+
+	"entity.takesapillage.clay_golem": "Clay Golem",
+	"entity.takesapillage.archer": "Archer",
+	"entity.takesapillage.skirmisher": "Skirmisher",
+	"entity.takesapillage.legioner": "Legioner",
+
+	"subtitle.takesapillage.entity.clay_golem.attack": "Clay Golem attacks",
+	"subtitle.takesapillage.entity.clay_golem.damage": "Clay Golem breaks",
+	"subtitle.takesapillage.entity.clay_golem.death": "Clay Golem dies",
+	"subtitle.takesapillage.entity.clay_golem.hurt": "Clay Golem hurts",
+	"subtitle.takesapillage.entity.clay_golem.repair": "Clay Golem repairred",
+	"subtitle.takesapillage.entity.clay_golem.step": "Clay Golem steps",
+
+	"subtitle.takesapillage.entity.legioner.ambient": "Legioner murmurs",
+	"subtitle.takesapillage.entity.legioner.celebrate": "Legioner celebrates",
+	"subtitle.takesapillage.entity.legioner.death": "Legioner dies",
+	"subtitle.takesapillage.entity.legioner.hurt": "Legioner hurts",
+
+	"advancements.takesapillage.root.title": "It Takes A Pillage",
+	"advancements.takesapillage.root.description": "Explore the Overworld for New Structures!",
+	"advancements.takesapillage.bastille.title": "Eh-eh-oh, eh-oh",
+	"advancements.takesapillage.bastille.description": "Locate a Bastille",
+	"advancements.takesapillage.pillager_camp.title": "Campfire Song Song",
+	"advancements.takesapillage.pillager_camp.description": "Locate a Pillager Camp",
+
+	"death.attack.clay_golem": "%1$s was pummeled by %2$s",
+	"death.attack.clay_golem.item": "%1$s was pummeled %2$s using %3$s",
+	"death.attack.archer": "%1$s was sniped by %2$s",
+	"death.attack.archer.item": "%1$s was sniped %2$s using %3$s",
+	"death.attack.skirmisher": "%1$s was chopped to bits by %2$s",
+	"death.attack.skirmisher.item": "%1$s was chopped to bits by %2$s while wielding %3$s",
+	"death.attack.legioner": "%1$s was struck down by %2$s",
+	"death.attack.legioner.item": "%1$s was struck down by %2$s while wielding %3$s",
+
+	"takesapillage.midnightconfig.REPLACE_IRON_GOLEMS": "Replace Iron Golems",
+	"takesapillage.midnightconfig.REMOVE_BAD_OMEN": "Remove Bad Omen",
+	"takesapillage.midnightconfig.DO_PILLAGE_SIEGES": "Do Pillage Sieges"
+
+}

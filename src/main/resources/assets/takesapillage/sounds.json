@@ -1,0 +1,101 @@
+{
+  "bastille_blues": {
+    "sounds": [
+      {
+        "name": "takesapillage:bastille_blues",
+        "stream": true
+      }
+    ]
+  },
+  "entity.clay_golem.attack": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.attack",
+    "sounds": [
+      "takesapillage:entity/clay_golem/throw"
+    ]
+  },
+  "entity.clay_golem.damage": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.damage",
+    "sounds": [
+      {
+        "name": "takesapillage:entity/clay_golem/damage1",
+        "volume": 0.8
+      },
+      {
+        "name": "takesapillage:entity/clay_golem/damage2",
+        "volume": 0.8
+      },
+      {
+        "name": "takesapillage:entity/clay_golem/damage1",
+        "volume": 0.8,
+        "pitch": 0.8
+      },
+      {
+        "name": "takesapillage:entity/clay_golem/damage2",
+        "volume": 0.8,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.clay_golem.death": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.death",
+    "sounds": [
+      "takesapillage:entity/clay_golem/death"
+    ]
+  },
+  "entity.clay_golem.hurt": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.hurt",
+    "sounds": [
+      "takesapillage:entity/clay_golem/hit1",
+      "takesapillage:entity/clay_golem/hit2",
+      "takesapillage:entity/clay_golem/hit3",
+      "takesapillage:entity/clay_golem/hit4"
+    ]
+  },
+  "entity.clay_golem.repair": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.repair",
+    "sounds": [
+      "takesapillage:entity/clay_golem/repair"
+    ]
+  },
+  "entity.clay_golem.step": {
+    "subtitle": "subtitle.takesapillage.entity.clay_golem.step",
+    "sounds": [
+      "takesapillage:entity/clay_golem/walk1",
+      "takesapillage:entity/clay_golem/walk2",
+      "takesapillage:entity/clay_golem/walk3",
+      "takesapillage:entity/clay_golem/walk4"
+    ]
+  },
+  "entity.legioner.ambient": {
+    "sounds": [
+      "takesapillage:entity/legioner/idle1",
+      "takesapillage:entity/legioner/idle2",
+      "takesapillage:entity/legioner/idle3",
+      "takesapillage:entity/legioner/idle4",
+      "takesapillage:entity/legioner/idle5"
+    ],
+    "subtitle": "subtitle.takesapillage.entity.legioner.ambient"
+  },
+  "entity.legioner.celebrate": {
+    "sounds": [
+      "takesapillage:entity/legioner/celebrate1",
+      "takesapillage:entity/legioner/celebrate2"
+    ],
+    "subtitle": "subtitle.takesapillage.entity.legioner.celebrate"
+  },
+  "entity.legioner.death": {
+    "sounds": [
+      "takesapillage:entity/legioner/death1",
+      "takesapillage:entity/legioner/death2"
+    ],
+    "subtitle": "subtitle.takesapillage.entity.legioner.death"
+  },
+  "entity.legioner.hurt": {
+    "sounds": [
+      "takesapillage:entity/legioner/hurt1",
+      "takesapillage:entity/legioner/hurt2",
+      "takesapillage:entity/legioner/hurt3"
+    ],
+    "subtitle": "subtitle.takesapillage.entity.legioner.hurt"
+  }
+}

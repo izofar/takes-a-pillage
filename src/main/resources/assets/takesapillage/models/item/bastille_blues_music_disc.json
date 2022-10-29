@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "takesapillage:item/bastille_blues_music_disc"
+  }
+}

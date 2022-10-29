@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:pillager_camp/entities/archer",
+	"fallback": "takesapillage:pillager_camp/entities/archer",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_archer",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

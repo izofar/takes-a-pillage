@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:pillager_camp/entities/livestock",
+	"fallback": "takesapillage:pillager_camp/entities/livestock",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_livestock",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:bastille/entities/illager",
+	"fallback": "takesapillage:bastille/entities/illager",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_soldier",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

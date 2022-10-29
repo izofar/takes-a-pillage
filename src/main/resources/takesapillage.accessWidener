@@ -1,0 +1,8 @@
+accessWidener v2 named
+accessible field net/minecraft/world/entity/animal/IronGolem attackAnimationTick I
+accessible method net/minecraft/world/entity/animal/IronGolem getAttackDamage ()F
+accessible method net/minecraft/world/entity/Mob maybeDisableShield (Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+accessible field net/minecraft/world/entity/ai/sensing/VillagerHostilesSensor ACCEPTABLE_DISTANCE_FROM_HOSTILES Lcom/google/common/collect/ImmutableMap;
+mutable field net/minecraft/world/entity/ai/sensing/VillagerHostilesSensor ACCEPTABLE_DISTANCE_FROM_HOSTILES Lcom/google/common/collect/ImmutableMap;
+accessible method net/minecraft/world/entity/LivingEntity onEffectRemoved (Lnet/minecraft/world/effect/MobEffectInstance;)V
+accessible class net/minecraft/world/entity/raid/Raid$RaiderType
