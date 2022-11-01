@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.izofar.takesapillage.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AddCustomRaidMemberMixin",
+    "ArcherArrowMixin",
+    "BlockMixin",
+    "ClayGolemSensorMixin",
+    "MilkBucketMixin",
+    "MobRememberSpawnReasonMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

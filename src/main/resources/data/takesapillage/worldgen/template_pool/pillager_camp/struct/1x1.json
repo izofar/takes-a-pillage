@@ -1,0 +1,33 @@
+{
+	"name": "takesapillage:pillager_camp/struct/1x1",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"location": "takesapillage:pillager_camp/archer_tower",
+				"processors": "takesapillage:pillager_camp/pillager_camp",
+				"projection": "rigid",
+				"element_type": "minecraft:legacy_single_pool_element"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"location": "takesapillage:pillager_camp/big_tent",
+				"processors": "takesapillage:pillager_camp/pillager_camp",
+				"projection": "rigid",
+				"element_type": "minecraft:legacy_single_pool_element"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"location": "takesapillage:pillager_camp/small_tent",
+				"processors": "takesapillage:pillager_camp/pillager_camp",
+				"projection": "rigid",
+				"element_type": "minecraft:legacy_single_pool_element"
+			}
+		}
+	]
+}

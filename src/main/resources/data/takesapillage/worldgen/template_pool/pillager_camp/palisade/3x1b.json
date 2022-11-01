@@ -1,0 +1,15 @@
+{
+  "name": "takesapillage:pillager_camp/palisade/3x1b",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:pillager_camp/palisade/3x1b",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

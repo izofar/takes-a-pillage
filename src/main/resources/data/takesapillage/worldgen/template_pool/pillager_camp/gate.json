@@ -1,0 +1,24 @@
+{
+  "name": "takesapillage:pillager_camp/gate",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:pillager_camp/gate_open",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:pillager_camp/gate_closed",
+        "processors": "takesapillage:pillager_camp/pillager_camp",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}
