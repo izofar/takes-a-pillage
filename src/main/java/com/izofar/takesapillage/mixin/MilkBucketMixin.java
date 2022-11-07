@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import java.util.Iterator;
 import java.util.Map;
 
-@Mixin(MilkBucketItem.class)
+@Mixin(value = MilkBucketItem.class, priority = 1333)
 public class MilkBucketMixin {
     @Redirect(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z"))
     public boolean changeEffects(@NotNull LivingEntity entity) {
