@@ -14,11 +14,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import java.util.Iterator;
 import java.util.Map;
 
-@Mixin(MilkBucketItem.class)
+@Mixin(value = MilkBucketItem.class, priority = 1333)
 public class MilkBucketMixin {
     @Redirect(method = "finishUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z"))
     public boolean changeEffects(@NotNull LivingEntity entity) {
-        if(!ModCommonConfigs.REMOVE_BAD_OMEN) return false;
         Map<MobEffect, MobEffectInstance> map = entity.getActiveEffectsMap();
         boolean changed = false;
 
@@ -26,7 +25,7 @@ public class MilkBucketMixin {
             MobEffect effect = iterator.next();
             MobEffectInstance instance = map.get(effect);
 
-            if(instance.getEffect() != MobEffects.BAD_OMEN) {
+            if(ModCommonConfigs.REMOVE_BAD_OMEN || instance.getEffect() != MobEffects.BAD_OMEN) {
                 iterator.remove();
                 entity.onEffectRemoved(instance);
                 changed = true;
