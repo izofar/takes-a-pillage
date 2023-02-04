@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public abstract class ModWorldEvents {
+public abstract class  ModWorldEvents {
 
     public static final PillageSiege PILLAGE_SIEGE = new PillageSiege();
 
