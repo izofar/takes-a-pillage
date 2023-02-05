@@ -1,74 +1,29 @@
 package com.izofar.takesapillage.config;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
-import com.izofar.takesapillage.TakesAPillageMod;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public final class ModConfigManager {
 
     private static final ModConfigManager INSTANCE;
-    private static final ForgeConfigSpec SPEC;
-    private static final Path PATH = Paths.get("config", TakesAPillageMod.MODID + "-common.toml");
 
-    static {
-        Pair<ModConfigManager, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ModConfigManager::new);
-        INSTANCE = specPair.getLeft();
-        SPEC = specPair.getRight();
-        CommentedFileConfig config = CommentedFileConfig.builder(PATH)
-                .sync()
-                .autoreload()
-                .writingMode(WritingMode.REPLACE)
-                .build();
-        config.load();
-        config.save();
-        SPEC.setConfig(config);
+    private boolean replaceIronGolems;
+    private double peacefulSpawnRate;
+    private double easySpawnRate;
+    private double normalSpawnRate;
+    private double hardSpawnRate;
+    private boolean removeBadOmen;
+    private boolean pillageSiegesOccur;
+
+    static{
+        INSTANCE = new ModConfigManager();
     }
 
-    private final BooleanValue replaceIronGolems;
-    private final DoubleValue peacefulSpawnRate;
-    private final DoubleValue easySpawnRate;
-    private final DoubleValue normalSpawnRate;
-    private final DoubleValue hardSpawnRate;
-    private final BooleanValue removeBadOmen;
-    private final BooleanValue pillageSiegesOccur;
-
-    private ModConfigManager(ForgeConfigSpec.Builder configSpecBuilder){
-        replaceIronGolems = configSpecBuilder
-                .translation("takesapillage.configGui.replaceIronGolems.title")
-                .define("Replace Iron Golems", ModCommonConfigs.REPLACE_IRON_GOLEMS);
-        peacefulSpawnRate = configSpecBuilder
-                .translation("takesapillage.configGui.peacefulGolemRate.title")
-                .defineInRange("Peaceful Replacement Rate",
-                        ModCommonConfigs.PEACEFUL_REPLACE_IRON_GOLEMS,
-                        0.0, 1.0);
-        easySpawnRate = configSpecBuilder
-                .translation("takesapillage.configGui.easyGolemRate.title")
-                .defineInRange("Easy Replacement Rate",
-                        ModCommonConfigs.EASY_REPLACE_IRON_GOLEMS,
-                        0.0, 1.0);
-        normalSpawnRate = configSpecBuilder
-                .translation("takesapillage.configGui.normalGolemRate.title")
-                .defineInRange("Normal Replacement Rate",
-                        ModCommonConfigs.NORMAL_REPLACE_IRON_GOLEMS,
-                        0.0, 1.0);
-        hardSpawnRate = configSpecBuilder
-                .translation("takesapillage.configGui.hardGolemRate.title")
-                .defineInRange("Hard Replacement Rate",
-                        ModCommonConfigs.HARD_REPLACE_IRON_GOLEMS,
-                        0.0, 1.0);
-        removeBadOmen = configSpecBuilder
-                .translation("takesapillage.configGui.removeBadOmen.title")
-                .define("Milk Removes Bad Omen", ModCommonConfigs.REMOVE_BAD_OMEN);
-        pillageSiegesOccur = configSpecBuilder
-                .translation("takesapillage.configGui.pillageSiegesOccur.title")
-                .define("Enable Pillage Sieges", ModCommonConfigs.DO_PILLAGE_SIEGES);
+    private ModConfigManager(){
+        replaceIronGolems = ModCommonConfigs.REPLACE_IRON_GOLEMS.get();
+        peacefulSpawnRate = ModCommonConfigs.PEACEFUL_REPLACE_IRON_GOLEMS.get();
+        easySpawnRate = ModCommonConfigs.EASY_REPLACE_IRON_GOLEMS.get();
+        normalSpawnRate = ModCommonConfigs.NORMAL_REPLACE_IRON_GOLEMS.get();
+        hardSpawnRate = ModCommonConfigs.HARD_REPLACE_IRON_GOLEMS.get();
+        removeBadOmen = ModCommonConfigs.REMOVE_BAD_OMEN.get();
+        pillageSiegesOccur = ModCommonConfigs.PILLAGE_SIEGES_OCCUR.get();
     }
 
     public static ModConfigManager getInstance(){
@@ -76,68 +31,68 @@ public final class ModConfigManager {
     }
 
     public boolean getReplaceIronGolems(){
-        return replaceIronGolems.get();
+        return replaceIronGolems;
     }
 
     public void setReplaceIronGolems(boolean value){
-        replaceIronGolems.set(value);
+        replaceIronGolems = value;
     }
 
     public Integer getPeacefulReplaceIronGolems(){
-        return (int)(peacefulSpawnRate.get() * 100);
+        return (int)(peacefulSpawnRate * 100);
     }
 
     public void setPeacefulReplaceIronGolems(Integer value){
-        peacefulSpawnRate.set(value.doubleValue() / 100);
+        peacefulSpawnRate = value.doubleValue() / 100;
     }
 
     public Integer getEasyReplaceIronGolems(){
-        return (int)(easySpawnRate.get() * 100);
+        return (int)(easySpawnRate * 100);
     }
 
     public void setEasyReplaceIronGolems(Integer value){
-        easySpawnRate.set(value.doubleValue() / 100);
+        easySpawnRate = value.doubleValue() / 100;
     }
 
     public Integer getNormalReplaceIronGolems(){
-        return (int)(normalSpawnRate.get() * 100);
+        return (int)(normalSpawnRate * 100);
     }
 
     public void setNormalReplaceIronGolems(Integer value){
-        normalSpawnRate.set(value.doubleValue() / 100);
+        normalSpawnRate = value.doubleValue() / 100;
     }
 
     public Integer getHardReplaceIronGolems(){
-        return (int)(hardSpawnRate.get() * 100);
+        return (int)(hardSpawnRate * 100);
     }
 
     public void setHardReplaceIronGolems(Integer value){
-        hardSpawnRate.set(value.doubleValue() / 100);
+        hardSpawnRate = value.doubleValue() / 100;
     }
 
     public boolean getRemoveBadOmen(){
-        return removeBadOmen.get();
+        return removeBadOmen;
     }
 
     public void setRemoveBadOmen(boolean value){
-        removeBadOmen.set(value);
+        removeBadOmen = value;
     }
 
     public boolean getPillageSiegesOccur(){
-        return pillageSiegesOccur.get();
+        return pillageSiegesOccur;
     }
 
     public void setPillageSiegesOccur(boolean value){
-        pillageSiegesOccur.set(value);
+        pillageSiegesOccur = value;
     }
 
     public void save(){
-        ModCommonConfigs.REPLACE_IRON_GOLEMS.set(replaceIronGolems.get());
-        ModCommonConfigs.PEACEFUL_REPLACE_IRON_GOLEMS.set(peacefulSpawnRate.get());
-        ModCommonConfigs.EASY_REPLACE_IRON_GOLEMS.set(easySpawnRate.get());
-        ModCommonConfigs.NORMAL_REPLACE_IRON_GOLEMS.set(normalSpawnRate.get());
-        ModCommonConfigs.HARD_REPLACE_IRON_GOLEMS.set(hardSpawnRate.get());
-        ModCommonConfigs.REMOVE_BAD_OMEN.set(removeBadOmen.get());
-        ModCommonConfigs.DO_PILLAGE_SIEGES.set(pillageSiegesOccur.get());
+        ModCommonConfigs.REPLACE_IRON_GOLEMS.set(replaceIronGolems);
+        ModCommonConfigs.PEACEFUL_REPLACE_IRON_GOLEMS.set(peacefulSpawnRate);
+        ModCommonConfigs.EASY_REPLACE_IRON_GOLEMS.set(easySpawnRate);
+        ModCommonConfigs.NORMAL_REPLACE_IRON_GOLEMS.set(normalSpawnRate);
+        ModCommonConfigs.HARD_REPLACE_IRON_GOLEMS.set(hardSpawnRate);
+        ModCommonConfigs.REMOVE_BAD_OMEN.set(removeBadOmen);
+        ModCommonConfigs.PILLAGE_SIEGES_OCCUR.set(pillageSiegesOccur);
     }
 }

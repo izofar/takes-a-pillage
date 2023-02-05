@@ -13,7 +13,7 @@ public class ModCommonConfigs {
     public static final double DEFAULT_NORMAL_REPLACE_IRON_GOLEMS = 0.5;
     public static final double DEFAULT_HARD_REPLACE_IRON_GOLEMS = 1.0;
     public static final boolean DEFAULT_REMOVE_BAD_OMEN = false;
-    public static final boolean DEFAULT_DO_PILLAGE_SIEGES = true;
+    public static final boolean DEFAULT_PILLAGE_SIEGES_OCCUR = true;
     
     public static final ForgeConfigSpec.ConfigValue<Boolean> REPLACE_IRON_GOLEMS;
     public static final ForgeConfigSpec.ConfigValue<Double> PEACEFUL_REPLACE_IRON_GOLEMS;
@@ -21,7 +21,7 @@ public class ModCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Double> NORMAL_REPLACE_IRON_GOLEMS;
     public static final ForgeConfigSpec.ConfigValue<Double> HARD_REPLACE_IRON_GOLEMS;
     public static final ForgeConfigSpec.ConfigValue<Boolean> REMOVE_BAD_OMEN;
-    public static final ForgeConfigSpec.ConfigValue<Boolean> DO_PILLAGE_SIEGES;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> PILLAGE_SIEGES_OCCUR;
 
     public static final String REPLACE_IRON_GOLEMS_LABEL = "Replace Iron Golems";
     public static final String REPLACE_IRON_GOLEMS_COMMENT = "Replace naturally spawning Iron Golems with Clay Golems?";
@@ -35,8 +35,8 @@ public class ModCommonConfigs {
     public static final String HARD_REPLACE_IRON_GOLEMS_COMMENT = "Clay Golem replacement rate (Hard difficulty)";
     public static final String REMOVE_BAD_OMEN_LABEL = "Milk Removes Bad Omen";
     public static final String REMOVE_BAD_OMEN_COMMENT = "Remove Bad Omen effect after drinking milk?";
-    public static final String DO_PILLAGE_SIEGES_LABEL = "Enable Pillage Sieges";
-    public static final String DO_PILLAGE_SIEGES_COMMENT = "Pillage Sieges occur at night?";
+    public static final String PILLAGE_SIEGES_OCCUR_LABEL = "Enable Pillage Sieges";
+    public static final String PILLAGE_SIEGES_OCCUR_COMMENT = "Pillage Sieges occur at night?";
 
     static {
         BUILDER.push("It Takes A Pillage - Config");
@@ -53,8 +53,8 @@ public class ModCommonConfigs {
                 .define(HARD_REPLACE_IRON_GOLEMS_LABEL, DEFAULT_HARD_REPLACE_IRON_GOLEMS);
         REMOVE_BAD_OMEN = BUILDER.comment(REMOVE_BAD_OMEN_COMMENT)
                 .define(REMOVE_BAD_OMEN_LABEL, DEFAULT_REMOVE_BAD_OMEN);
-        DO_PILLAGE_SIEGES = BUILDER.comment(DO_PILLAGE_SIEGES_COMMENT)
-                .define(DO_PILLAGE_SIEGES_LABEL, DEFAULT_DO_PILLAGE_SIEGES);
+        PILLAGE_SIEGES_OCCUR = BUILDER.comment(PILLAGE_SIEGES_OCCUR_COMMENT)
+                .define(PILLAGE_SIEGES_OCCUR_LABEL, DEFAULT_PILLAGE_SIEGES_OCCUR);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

@@ -34,7 +34,7 @@ public class PillageSiege implements CustomSpawner {
 
     @Override
     public int tick(ServerLevel serverlevel, boolean spawnEnemies, boolean spawnFriendlies) {
-        if (!serverlevel.isDay() && spawnEnemies && ModCommonConfigs.DO_PILLAGE_SIEGES.get()) {
+        if (!serverlevel.isDay() && spawnEnemies && ModCommonConfigs.PILLAGE_SIEGES_OCCUR.get()) {
             float f = serverlevel.getTimeOfDay(0.0F);
             if ((double)f == 0.5D) {
                 this.siegeState = serverlevel.random.nextInt(10) == 0 ? State.SIEGE_TONIGHT : State.SIEGE_DONE;
