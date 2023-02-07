@@ -38,7 +38,7 @@ public class RavagerHornItem extends InstrumentItem {
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int remainingTicks) {
         super.finishUsingItem(stack, level, livingEntity);
-        livingEntity.getItemInHand(livingEntity.getUsedItemHand()).hurtAndBreak(1, livingEntity, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
+        stack.hurtAndBreak(1, livingEntity, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
     }
 
     @Override

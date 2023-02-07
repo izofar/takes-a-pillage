@@ -33,7 +33,7 @@ public abstract class ModEntityEvents {
                 && event.getLevel() instanceof ServerLevel serverLevel
                 && ((IMobRememberSpawnReason)ironGolem).getMobSpawnType() != MobSpawnType.COMMAND
                 && !ironGolem.isPlayerCreated()
-                && event.getLevel().getRandom().nextFloat() < replacementRate) {
+                && event.getLevel().getRandom().nextDouble() < replacementRate) {
             ClayGolem clayGolem = ModEntityTypes.CLAY_GOLEM.get().create(serverLevel);
             if(clayGolem == null) return;
             clayGolem.moveTo(ironGolem.position());

@@ -1,5 +1,6 @@
 package com.izofar.takesapillage.event;
 
+import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import com.izofar.takesapillage.world.PillageSiege;
 import net.minecraft.server.level.ServerLevel;
@@ -9,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public abstract class  ModWorldEvents {
+public abstract class ModWorldEvents {
 
     public static final PillageSiege PILLAGE_SIEGE = new PillageSiege();
 
@@ -17,6 +18,7 @@ public abstract class  ModWorldEvents {
     public static void onSpecialSpawn(TickEvent.LevelTickEvent event) {
         if (event.level instanceof ServerLevel serverLevel
                 && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
+                && ModCommonConfigs.PILLAGE_SIEGES_OCCUR.get()
                 && serverLevel.dimension() == Level.OVERWORLD) {
             PILLAGE_SIEGE.tick(serverLevel, true, false);
         }
