@@ -38,7 +38,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class Legioner extends AbstractIllager implements ShieldedMob{
+public class Legioner extends AbstractIllager implements IShieldedMob {
 
     private static final EntityDataAccessor<Boolean> DATA_IS_SHIELDED = SynchedEntityData.defineId(Legioner.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_SHIELD_HAND = SynchedEntityData.defineId(Legioner.class, EntityDataSerializers.BOOLEAN); // True for Main Hand, False for Offhand

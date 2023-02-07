@@ -39,6 +39,15 @@
 	"death.attack.skirmisher": "%1$s was chopped to bits by %2$s",
 	"death.attack.skirmisher.item": "%1$s was chopped to bits by %2$s while wielding %3$s",
 	"death.attack.legioner": "%1$s was struck down by %2$s",
-	"death.attack.legioner.item": "%1$s was struck down by %2$s while wielding %3$s"
+	"death.attack.legioner.item": "%1$s was struck down by %2$s while wielding %3$s",
+
+	"takesapillage.configGui.title": "It Takes a Pillage - Config",
+	"takesapillage.configGui.replaceIronGolems.title": "Clay Golem Spawns",
+	"takesapillage.configGui.peacefulGolemRate.title": "Peaceful Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.easyGolemRate.title": "Easy Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.normalGolemRate.title": "Normal Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.hardGolemRate.title": "Hard Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.removeBadOmen.title": "Milk Removes Bad Omen",
+	"takesapillage.configGui.pillageSiegesOccur.title": "Pillage Sieges"
 
 }

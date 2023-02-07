@@ -39,6 +39,15 @@
 	"death.attack.skirmisher": "%1$s被%2$s砍成了碎片",
 	"death.attack.skirmisher.item": "%1$s被%2$s用%3$s砍成了碎片",
 	"death.attack.legioner": "%1$s被%2$s击杀了",
-	"death.attack.legioner.item": "%1$s被%2$s用%3$s击杀了"
+	"death.attack.legioner.item": "%1$s被%2$s用%3$s击杀了",
+
+	"takesapillage.configGui.title": "It Takes a Pillage - Config",
+	"takesapillage.configGui.replaceIronGolems.title": "Clay Golem Spawns",
+	"takesapillage.configGui.peacefulGolemRate.title": "Peaceful Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.easyGolemRate.title": "Easy Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.normalGolemRate.title": "Normal Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.hardGolemRate.title": "Hard Difficulty Clay Golem Replacement",
+	"takesapillage.configGui.removeBadOmen.title": "Milk Removes Bad Omen",
+	"takesapillage.configGui.pillageSiegesOccur.title": "Pillage Sieges"
 
 }
