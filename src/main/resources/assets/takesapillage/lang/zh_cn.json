@@ -48,7 +48,8 @@
   "takesapillage.configGui.normalGolemRate.title": "Normal Difficulty Clay Golem Replacement",
   "takesapillage.configGui.hardGolemRate.title": "Hard Difficulty Clay Golem Replacement",
   "takesapillage.configGui.removeBadOmen.title": "Milk Removes Bad Omen",
-  "takesapillage.configGui.pillageSiegesOccur.title": "Pillage Sieges"
+  "takesapillage.configGui.pillageSiegesOccur.title": "Pillage Sieges",
 
+  "instrument.takesapillage.raid_horn": "Raid Horn"
 
 }

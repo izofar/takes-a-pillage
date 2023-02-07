@@ -25,6 +25,7 @@ public class TakesAPillageMod
 
     public TakesAPillageMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModInstruments.register(eventBus);
         ModItems.register(eventBus);
         ModEntityTypes.register(eventBus);
         ModSoundEvents.register(eventBus);
