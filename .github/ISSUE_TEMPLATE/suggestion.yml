@@ -1,13 +1,13 @@
 # This template is repurposed from the Create Mod bug report template at:
 #   https://raw.githubusercontent.com/Creators-of-Create/Create/mc1.18/dev/.github/ISSUE_TEMPLATE/suggestion.yml
 name: Suggestion
-description: Suggest something that would improve Bygone Nether
+description: Suggest something that would improve It Takes a Pillage
 labels: [ "suggestion" ]
 body:
   -   type: textarea
       attributes:
         label: Describe the Suggestion
-        description: What should I add or change to make Bygone Nether better?
+        description: What should I add or change to make It Takes a Pillage better?
       validations:
         required: true
   -   type: textarea
@@ -24,4 +24,4 @@ body:
         required: false
   -   type: markdown
       attributes:
-        value: "Thank you for taking the time to make this suggestion and help improve Bygone Nether!"
+        value: "Thank you for taking the time to make this suggestion and help improve It Takes a Pillage!"
