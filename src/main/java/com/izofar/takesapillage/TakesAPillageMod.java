@@ -5,12 +5,15 @@ import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.*;
 import com.izofar.takesapillage.util.ModLists;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -33,6 +36,7 @@ public class TakesAPillageMod
         ModFeatures.register(eventBus);
 
         eventBus.addListener(this::commonSetup);
+        eventBus.addListener(this::clientSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "takesapillage-common.toml");
         ModLoadingContext.get().registerExtensionPoint(
@@ -47,6 +51,15 @@ public class TakesAPillageMod
         event.enqueueWork(() -> {
             ModLists.setupEntityLists();
             ModWorldEvents.addModdedRaiders();
+        });
+    }
+
+    private void clientSetup(FMLClientSetupEvent event){
+        event.enqueueWork(() -> {
+            ItemProperties.register(ModItems.RAVAGER_HORN.get(),
+                    new ResourceLocation("tooting"),
+                    (stack, level, livingEntity, unusedInt) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F
+                );
         });
     }
 }
