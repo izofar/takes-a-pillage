@@ -26,12 +26,14 @@ public abstract class ModEntityEvents {
     @SubscribeEvent
     public static void replaceNaturallySpawningIronGolemWithClayGolem(EntityJoinWorldEvent event) {
         if(!ModCommonConfigs.REPLACE_IRON_GOLEMS.get()) return;
+        double replacementRate = ModCommonConfigs.getReplacementRate(event.getWorld().getDifficulty());
         Entity entity = event.getEntity();
         if (entity instanceof IronGolemEntity
                 && entity.getClass() == IronGolemEntity.class
                 && event.getWorld() instanceof ServerWorld
                 && ((IMobRememberSpawnReason)entity).getMobSpawnType() != SpawnReason.COMMAND
-                && !((IronGolemEntity) entity).isPlayerCreated()) {
+                && !((IronGolemEntity) entity).isPlayerCreated()
+                && event.getWorld().getRandom().nextDouble() < replacementRate) {
             ClayGolemEntity clayGolemEntity = ModEntityTypes.CLAY_GOLEM.get().create(event.getWorld());
             if(clayGolemEntity == null) return;
             clayGolemEntity.moveTo(entity.position());

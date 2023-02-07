@@ -35,7 +35,7 @@ public abstract class ModWorldEvents {
         World level = event.world;
         if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
                 && level instanceof ServerWorld
-                && ModCommonConfigs.DO_PILLAGE_SIEGES.get()
+                && ModCommonConfigs.PILLAGE_SIEGES_OCCUR.get()
                 && level.dimension() == World.OVERWORLD) {
             PILLAGE_SIEGE.tick((ServerWorld) level, true, false);
         }

@@ -1,6 +1,6 @@
 package com.izofar.takesapillage.entity.ai;
 
-import com.izofar.takesapillage.entity.ShieldedMob;
+import com.izofar.takesapillage.entity.IShieldedMobEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -17,7 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class ShieldGoal<T extends MobEntity & ShieldedMob> extends Goal {
+public class ShieldGoal<T extends MobEntity & IShieldedMobEntity> extends Goal {
 
     protected final Class<? extends LivingEntity> targetType;
     protected final T mob;

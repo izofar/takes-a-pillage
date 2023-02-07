@@ -15,26 +15,17 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
-import java.util.UUID;
 
 public class ArcherEntity extends AbstractIllagerEntity implements IRangedAttackMob {
-
-    private static final DataParameter<Optional<UUID>> DATA_TARGET_UUID = EntityDataManager.defineId(ArcherEntity.class, DataSerializers.OPTIONAL_UUID);
-    private final EntityPredicate attackTargeting = (new EntityPredicate()).range(40.0D);
 
     public ArcherEntity(EntityType<? extends AbstractIllagerEntity> entitytype, World world) {
         super(entitytype, world);
@@ -65,13 +56,12 @@ public class ArcherEntity extends AbstractIllagerEntity implements IRangedAttack
 
     @Override
     public AbstractIllagerEntity.ArmPose getArmPose() {
-        return this.getTarget() != null ? ArmPose.CROSSBOW_HOLD : ArmPose.NEUTRAL;
+        return this.isAggressive() ? ArmPose.CROSSBOW_HOLD : ArmPose.NEUTRAL;
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_TARGET_UUID, Optional.empty());
     }
 
     @Override
@@ -126,43 +116,6 @@ public class ArcherEntity extends AbstractIllagerEntity implements IRangedAttack
             return this.getTeam() == null && entity.getTeam() == null;
         } else {
             return false;
-        }
-    }
-
-    @Nullable
-    @Override
-    public LivingEntity getTarget(){
-        try{
-            UUID uuid = this.getTargetUUID();
-            return uuid == null ? super.getTarget() : ArcherEntity.getEntityByUUID(this.level, this, uuid);
-        }catch(IllegalArgumentException exception){
-            return super.getTarget();
-        }
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target){
-        super.setTarget(target);
-        this.setTargetUUID(target == null ? null : target.getUUID());
-    }
-
-    @Nullable
-    private UUID getTargetUUID(){
-        return this.entityData.get(DATA_TARGET_UUID).orElse(null);
-    }
-
-    private void setTargetUUID(@Nullable UUID uuid){
-        this.entityData.set(DATA_TARGET_UUID, Optional.ofNullable(uuid));
-    }
-
-    private static LivingEntity getEntityByUUID(World level, ArcherEntity source, UUID uuid){
-        PlayerEntity player;
-        if((player = level.getPlayerByUUID(uuid)) != null){
-            return player;
-        }else {
-            double inflation = source.getAttribute(Attributes.FOLLOW_RANGE).getBaseValue();
-            AxisAlignedBB aabb = source.getBoundingBox().inflate(inflation);
-            return level.getNearbyEntities(MobEntity.class, source.attackTargeting, source, aabb).stream().filter(livingEntity -> livingEntity.getUUID().equals(uuid)).findFirst().orElse(null);
         }
     }
 

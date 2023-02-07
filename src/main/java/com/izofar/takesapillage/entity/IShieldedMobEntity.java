@@ -1,6 +1,6 @@
 package com.izofar.takesapillage.entity;
 
-public interface ShieldedMob {
+public interface IShieldedMobEntity {
     boolean isShieldDisabled();
     void startUsingShield();
     void stopUsingShield();

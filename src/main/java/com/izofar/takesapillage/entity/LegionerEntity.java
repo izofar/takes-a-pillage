@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class LegionerEntity extends AbstractIllagerEntity implements ShieldedMob{
+public class LegionerEntity extends AbstractIllagerEntity implements IShieldedMobEntity {
 
     private static final DataParameter<Boolean> DATA_IS_SHIELDED = EntityDataManager.defineId(LegionerEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> DATA_SHIELD_HAND = EntityDataManager.defineId(LegionerEntity.class, DataSerializers.BOOLEAN); // True for Main Hand, False for Offhand
