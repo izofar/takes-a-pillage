@@ -1,17 +1,14 @@
 package com.izofar.takesapillage;
 
-import com.izofar.takesapillage.client.gui.ModConfigScreen;
+import com.izofar.takesapillage.client.ModClientHandler;
 import com.izofar.takesapillage.config.ModCommonConfigs;
 import com.izofar.takesapillage.event.ModBlockEvents;
 import com.izofar.takesapillage.event.ModEntityEvents;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.*;
 import com.izofar.takesapillage.util.ModLists;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -40,10 +37,6 @@ public class TakesAPillageMod
         eventBus.addListener(this::clientSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "takesapillage-common.toml");
-        ModLoadingContext.get().registerExtensionPoint(
-                ExtensionPoint.CONFIGGUIFACTORY,
-                () -> (mc, screen) -> new ModConfigScreen(screen)
-        );
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(ModBlockEvents.class);
@@ -63,10 +56,8 @@ public class TakesAPillageMod
 
     private void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
-            ItemModelsProperties.register(ModItems.RAVAGER_HORN.get(),
-                    new ResourceLocation("tooting"),
-                    (stack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F
-            );
+            ModClientHandler.registerConfigscreen();
+            ModClientHandler.registerItemModelProperties();
         });
     }
 }
