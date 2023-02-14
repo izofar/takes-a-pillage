@@ -8,8 +8,8 @@
     "ArcherArrowMixin",
     "BlockMixin",
     "ClayGolemSensorMixin",
-    "MilkBucketMixin",
-    "MobRememberSpawnReasonMixin"
+    "MobRememberSpawnReasonMixin",
+    "MilkBucketItemMixin"
   ],
   "client": [
   ],
