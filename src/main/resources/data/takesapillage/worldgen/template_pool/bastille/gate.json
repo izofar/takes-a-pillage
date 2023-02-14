@@ -1,0 +1,78 @@
+{
+  "name": "takesapillage:bastille/gate",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/open_jail",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/closed_jail",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/open_trade",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/closed_trade",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/wall_tree",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/wall_spikes",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/wall_church",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/gate/wall_tents",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}

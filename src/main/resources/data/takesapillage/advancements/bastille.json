@@ -1,0 +1,31 @@
+{
+  "parent": "takesapillage:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:deepslate_bricks"
+    },
+    "title": {
+      "translate": "advancements.takesapillage.bastille.title"
+    },
+    "description": {
+      "translate": "advancements.takesapillage.bastille.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "in_bastille": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "feature": "takesapillage:bastille"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "in_bastille"
+    ]
+  ]
+}

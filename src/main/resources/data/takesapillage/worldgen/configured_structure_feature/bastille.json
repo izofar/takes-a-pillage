@@ -1,0 +1,12 @@
+{
+  "type": "takesapillage:pillager_structure",
+  "config": {
+    "start_pool": "takesapillage:bastille/start_pool",
+    "size": 3,
+    "terrain_search_radius": 3,
+    "max_terrain_range": 8
+  },
+  "biomes": "#takesapillage:has_structure/pillager_structure",
+  "adapt_noise": true,
+  "spawn_overrides": {}
+}

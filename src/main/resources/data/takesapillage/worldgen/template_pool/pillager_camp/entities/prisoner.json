@@ -1,0 +1,14 @@
+{
+	"name": "takesapillage:pillager_camp/entities/prisoner",
+	"fallback": "takesapillage:pillager_camp/entities/prisoner",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"feature": "takesapillage:mob_feature_prisoner",
+				"projection": "rigid",
+				"element_type": "minecraft:feature_pool_element"
+			}
+		}
+	]
+}

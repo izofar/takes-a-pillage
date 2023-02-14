@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "takesapillage",
+  "version": "${version}",
+
+  "name": "Takes a Pillage",
+  "description": "The Pillager civilization has evolved.",
+  "authors": [
+    "izofar",
+    "ZestyBlaze"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/it-takes-a-pillage-fabric",
+    "sources": "https://github.com/izofar/takes-a-pillage",
+    "issues": "https://github.com/izofar/takes-a-pillage/issues"
+  },
+
+  "license": "MIT License",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.izofar.takesapillage.TakesAPillageMod"
+    ],
+    "client": [
+      "com.izofar.takesapillage.client.TAPClient"
+    ],
+    "modmenu": [
+      "com.izofar.takesapillage.integration.ModMenu"
+    ]
+  },
+  "mixins": [
+    "takesapillage.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.18",
+    "java": ">=17"
+  },
+  "accessWidener": "takesapillage.accessWidener"
+}

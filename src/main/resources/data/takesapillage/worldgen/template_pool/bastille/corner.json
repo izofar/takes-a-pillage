@@ -1,0 +1,78 @@
+{
+  "name": "takesapillage:bastille/corner",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/inside_cage_broken",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/inside_cage_stairwell",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_cage",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_corner_barracks",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_corner_farm",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_corner_stables",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_inner_corner_grave",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "takesapillage:bastille/corner/outside_inner_corner_ravager",
+        "processors": "takesapillage:bastille/bastille",
+        "projection": "rigid",
+        "element_type": "minecraft:legacy_single_pool_element"
+      }
+    }
+  ]
+}
