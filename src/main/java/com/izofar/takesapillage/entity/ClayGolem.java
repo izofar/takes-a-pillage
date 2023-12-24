@@ -9,8 +9,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.EntityDamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,9 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
-import net.minecraft.world.level.block.state.predicate.BlockMaterialPredicate;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.material.Material;
 
 import java.util.function.Predicate;
 
@@ -52,7 +48,7 @@ public class ClayGolem extends IronGolem {
 
     public static BlockPattern getOrCreateClayGolemFull() {
         if (clayGolemFull == null)
-            clayGolemFull = BlockPatternBuilder.start().aisle("~^~", "###", "~#~").where('^', BlockInWorld.hasState(PUMPKINS_PREDICATE)).where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.CLAY))).where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR))).build();
+            clayGolemFull = BlockPatternBuilder.start().aisle("~^~", "###", "~#~").where('^', BlockInWorld.hasState(PUMPKINS_PREDICATE)).where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.CLAY))).where('~', (block) -> block.getState().isAir()).build();
         return clayGolemFull;
     }
 
@@ -81,23 +77,6 @@ public class ClayGolem extends IronGolem {
         }
     }
 
-    // IronGolem.goHurtTarget(Entity target) with modified DamageSource on line 87
-    @Override
-    public boolean doHurtTarget(Entity target){
-        this.attackAnimationTick = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
-        float f = this.getAttackDamage();
-        float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-        boolean flag = target.hurt(new EntityDamageSource("clay_golem", this), f1);
-        if (flag) {
-            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
-            this.doEnchantDamageEffects(this, target);
-        }
-
-        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
-        return flag;
-    }
-
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (!itemstack.is(Items.CLAY_BALL)) {
@@ -114,7 +93,7 @@ public class ClayGolem extends IronGolem {
                     itemstack.shrink(1);
                 }
 
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }
     }

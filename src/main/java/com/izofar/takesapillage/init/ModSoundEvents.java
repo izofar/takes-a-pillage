@@ -26,7 +26,7 @@ public abstract class ModSoundEvents {
     public static final RegistryObject<SoundEvent> BASTILLE_BLUES = registerSoundEvent("bastille_blues");
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
-        return MODDED_SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(TakesAPillageMod.MODID, name)));
+        return MODDED_SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(TakesAPillageMod.MODID, name)));
     }
 
     public static void register(IEventBus eventBus) {

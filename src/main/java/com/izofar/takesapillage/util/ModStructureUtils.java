@@ -1,20 +1,13 @@
 package com.izofar.takesapillage.util;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
 
 public abstract class ModStructureUtils {
-
-    public static boolean isNearStructure(Structure.GenerationContext context, Holder<StructureSet> feature, int radius) {
-        ChunkPos chunkPos = context.chunkPos();
-        return context.chunkGenerator().hasStructureChunkInRange(feature, context.randomState(), context.seed(), chunkPos.x, chunkPos.z, radius);
-    }
 
     public static boolean isRelativelyFlat(Structure.GenerationContext context, int chunkSearchRadius, int maxTerrainHeightVariation) {
         ChunkPos chunkpos = context.chunkPos();

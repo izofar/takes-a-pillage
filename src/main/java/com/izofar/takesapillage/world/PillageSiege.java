@@ -86,7 +86,7 @@ public class PillageSiege implements CustomSpawner {
                         }
                     }
                     if (serverLevel.getTimeOfDay(serverLevel.dayTime()) > Mth.frac(11.0D / 24.0D)) {
-                        serverLevel.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.RAID_HORN, SoundSource.NEUTRAL, 64.0F, 1.0F);
+                        serverLevel.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.RAID_HORN.get(), SoundSource.NEUTRAL, 64.0F, 1.0F);
                         serverLevel.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0F, 1.0F);
                         serverLevel.gameEvent(null, GameEvent.BLOCK_CHANGE, blockpos);
                     }

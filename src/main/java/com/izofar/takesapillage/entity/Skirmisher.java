@@ -1,6 +1,5 @@
 package com.izofar.takesapillage.entity;
 
-import com.izofar.takesapillage.entity.ai.ModIllagerAI;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -70,11 +69,6 @@ public class Skirmisher extends AbstractIllager {
     }
 
     @Override
-    public boolean doHurtTarget(Entity target){
-        return ModIllagerAI.doHurtTarget(this, target, "skirmisher");
-    }
-
-    @Override
     public AbstractIllager.IllagerArmPose getArmPose() {
         if (this.isAggressive()) return AbstractIllager.IllagerArmPose.ATTACKING;
         return this.isCelebrating() ? AbstractIllager.IllagerArmPose.CELEBRATING : AbstractIllager.IllagerArmPose.CROSSED;
@@ -98,7 +92,7 @@ public class Skirmisher extends AbstractIllager {
     @Override
     protected void customServerAiStep() {
         if (!this.isNoAi() && GoalUtils.hasGroundPathNavigation(this))
-            ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(((ServerLevel)this.level).isRaided(this.blockPosition()));
+            ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(((ServerLevel)this.level()).isRaided(this.blockPosition()));
         super.customServerAiStep();
     }
 

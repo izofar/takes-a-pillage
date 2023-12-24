@@ -12,8 +12,11 @@ import com.izofar.takesapillage.event.ModBlockEvents;
 import com.izofar.takesapillage.event.ModEntityEvents;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.ModEntityTypes;
+import com.izofar.takesapillage.init.ModItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -40,5 +43,17 @@ public abstract class RegistryEvents {
         event.registerEntityRenderer(ModEntityTypes.ARCHER.get(), ArcherRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SKIRMISHER.get(), SkirmisherRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.LEGIONER.get(), LegionerRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItems.ARCHER_SPAWN_EGG);
+            event.accept(ModItems.SKIRMISHER_SPAWN_EGG);
+            event.accept(ModItems.LEGIONER_SPAWN_EGG);
+        } else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.RAVAGER_HORN);
+            event.accept(ModItems.BASTILLE_BLUES_MUSIC_DISC);
+        }
     }
 }

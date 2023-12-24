@@ -37,7 +37,6 @@ public class TakesAPillageMod
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "takesapillage-common.toml");
 
-
         MinecraftForge.EVENT_BUS.register(this);
     }
 

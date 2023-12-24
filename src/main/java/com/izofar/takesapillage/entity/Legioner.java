@@ -1,6 +1,5 @@
 package com.izofar.takesapillage.entity;
 
-import com.izofar.takesapillage.entity.ai.ModIllagerAI;
 import com.izofar.takesapillage.entity.ai.ShieldGoal;
 import com.izofar.takesapillage.init.ModSoundEvents;
 import net.minecraft.nbt.CompoundTag;
@@ -86,7 +85,7 @@ public class Legioner extends AbstractIllager implements IShieldedMob {
     @Override
     public void tick(){
         super.tick();
-        if(!this.level.isClientSide){
+        if(!this.level().isClientSide){
             this.decrementShieldCooldown();
         }
     }
@@ -106,11 +105,6 @@ public class Legioner extends AbstractIllager implements IShieldedMob {
     protected void populateDefaultEquipmentSlots(RandomSource randomsource, DifficultyInstance difficulty) {
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
         this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity target){
-        return ModIllagerAI.doHurtTarget(this, target, "legioner");
     }
 
     @Override
@@ -134,7 +128,7 @@ public class Legioner extends AbstractIllager implements IShieldedMob {
         if(!this.isUsingShield()){
             super.knockback(x, y, z);
         }else{
-            this.playSound(SoundEvents.SHIELD_BLOCK, 1.0F, 0.8F + this.level.random.nextFloat() * 0.4F);
+            this.playSound(SoundEvents.SHIELD_BLOCK, 1.0F, 0.8F + this.level().random.nextFloat() * 0.4F);
         }
     }
 
@@ -149,8 +143,8 @@ public class Legioner extends AbstractIllager implements IShieldedMob {
     private void disableShield() {
         this.setShieldCooldown(60);
         this.stopUsingShield();
-        this.level.broadcastEntityEvent(this, (byte)30);
-        this.playSound(SoundEvents.SHIELD_BREAK, 0.8F, 0.8F + this.level.random.nextFloat() * 0.4F);
+        this.level().broadcastEntityEvent(this, (byte)30);
+        this.playSound(SoundEvents.SHIELD_BREAK, 0.8F, 0.8F + this.level().random.nextFloat() * 0.4F);
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.data.worldgen.StructureSets;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
@@ -20,9 +19,6 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import java.util.Optional;
 
 public class PillagerStructure extends Structure {
-
-    private static final int STRUCTURE_SEARCH_RADIUS = 10;
-    private static final int MAX_TERRAIN_RANGE = 10;
 
     public static final Codec<PillagerStructure> CODEC = RecordCodecBuilder.<PillagerStructure>mapCodec(instance ->
             instance.group(PillagerStructure.settingsCodec(instance),
@@ -75,9 +71,7 @@ public class PillagerStructure extends Structure {
         int j = context.chunkPos().z >> 4;
         WorldgenRandom worldgenrandom = new WorldgenRandom(new LegacyRandomSource(0L));
         worldgenrandom.setSeed((i ^ j << 4) ^ context.seed());
-        return !ModStructureUtils.isNearStructure(context, StructureSets.VILLAGES, STRUCTURE_SEARCH_RADIUS)
-                && !ModStructureUtils.isNearStructure(context, StructureSets.PILLAGER_OUTPOSTS, STRUCTURE_SEARCH_RADIUS)
-                && ModStructureUtils.isRelativelyFlat(context, terrainSearchRadius, maxTerrainRange)
+        return ModStructureUtils.isRelativelyFlat(context, terrainSearchRadius, maxTerrainRange)
                 && ModStructureUtils.isOnLand(context, terrainSearchRadius);
     }
 

@@ -2,9 +2,9 @@ package com.izofar.takesapillage.client.gui;
 
 import com.izofar.takesapillage.TakesAPillageMod;
 import com.izofar.takesapillage.config.ModConfigManager;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.Screen;
@@ -116,13 +116,12 @@ public class ModConfigScreen extends Screen {
 
         this.addWidget(this.optionsList);
 
-        this.addRenderableWidget(new Button(
-                (this.width - BUTTON_WIDTH) / 2,
-                this.height - DONE_BUTTON_TOP_OFFSET,
-                BUTTON_WIDTH, BUTTON_HEIGHT,
-                Component.translatable("gui.done"),
-                button -> this.onClose()
-        ));
+        this.addRenderableWidget(
+            Button.builder(Component.translatable("gui.done"), button -> this.onClose())
+                .bounds((this.width - BUTTON_WIDTH) / 2, this.height - DONE_BUTTON_TOP_OFFSET,
+                    BUTTON_WIDTH, BUTTON_HEIGHT)
+                .build()
+        );
     }
 
     @Override
@@ -132,10 +131,10 @@ public class ModConfigScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(matrixStack);
-        this.optionsList.render(matrixStack, mouseX, mouseY, partialTicks);
-        drawCenteredString(matrixStack, this.font, this.title.getString(), this.width / 2, TITLE_HEIGHT, 0xFFFFFF);
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(guiGraphics);
+        this.optionsList.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.drawCenteredString(this.font, this.title.getString(), this.width / 2, TITLE_HEIGHT, 0xFFFFFF);
+        super.render(guiGraphics, mouseX, mouseY, partialTicks);
     }
 }

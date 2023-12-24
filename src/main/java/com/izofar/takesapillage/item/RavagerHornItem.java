@@ -1,9 +1,5 @@
 package com.izofar.takesapillage.item;
 
-import com.izofar.takesapillage.init.ModItems;
-import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -13,26 +9,17 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.InstrumentItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 
 public class RavagerHornItem extends InstrumentItem {
 
-    private TagKey<Instrument> instruments;
-
     public RavagerHornItem(Item.Properties properties, TagKey<Instrument> instruments) {
         super(properties, instruments);
-        this.instruments = instruments;
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-        if (this.allowedIn(tab)) {
-            for(Holder<Instrument> holder : Registry.INSTRUMENT.getTagOrEmpty(this.instruments)) {
-                stackList.add(create(ModItems.RAVAGER_HORN.get(), holder));
-            }
-        }
     }
 
     @Override
