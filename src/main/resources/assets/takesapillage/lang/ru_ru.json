@@ -1,0 +1,55 @@
+{
+
+	"item.takesapillage.archer_spawn_egg": "Яйцо призыва лучника",
+	"item.takesapillage.skirmisher_spawn_egg": "Яйцо призыва застрельщика",
+	"item.takesapillage.legioner_spawn_egg": "Яйцо призыва легионера",
+
+	"item.takesapillage.ravager_horn": "Рог разорителя",
+	"item.takesapillage.bastille_blues_music_disc": "Пластинка",
+	"item.takesapillage.bastille_blues_music_disc.desc": "izofar - Bastille Blues",
+
+	"entity.takesapillage.clay_golem": "Глиняный голем",
+	"entity.takesapillage.archer": "Лучник",
+	"entity.takesapillage.skirmisher": "Застрельщик",
+	"entity.takesapillage.legioner": "Легионер",
+
+	"subtitle.takesapillage.entity.clay_golem.attack": "Глиняный голем атакует",
+	"subtitle.takesapillage.entity.clay_golem.damage": "Глиняный голем повреждён",
+	"subtitle.takesapillage.entity.clay_golem.death": "Глиняный голем погибает",
+	"subtitle.takesapillage.entity.clay_golem.hurt": "Глиняный голем ранен",
+	"subtitle.takesapillage.entity.clay_golem.repair": "Глиняный голем починен",
+	"subtitle.takesapillage.entity.clay_golem.step": "Шаги глиняного голема",
+
+	"subtitle.takesapillage.entity.legioner.ambient": "Бормотание легионера",
+	"subtitle.takesapillage.entity.legioner.celebrate": "Легионер торжествует",
+	"subtitle.takesapillage.entity.legioner.death": "Легионер погибает",
+	"subtitle.takesapillage.entity.legioner.hurt": "Легионер ранен",
+
+	"advancements.takesapillage.root.title": "It Takes A Pillage",
+	"advancements.takesapillage.root.description": "Исследуйте Верхний мир в поисках новых структур!",
+	"advancements.takesapillage.bastille.title": "О-ой",
+	"advancements.takesapillage.bastille.description": "Найдите бастилию",
+	"advancements.takesapillage.pillager_camp.title": "Песня у костра",
+	"advancements.takesapillage.pillager_camp.description": "Найдите лагерь разбойников",
+
+	"death.attack.clay_golem": "%1$s был убит %2$s",
+	"death.attack.clay_golem.item": "%1$s был убит %2$s с помощью %3$s",
+	"death.attack.archer": "%1$s был застрелен %2$s",
+	"death.attack.archer.item": "%1$s был застрелен %2$s с помощью %3$s",
+	"death.attack.skirmisher": "%1$s был порезан на куски %2$s",
+	"death.attack.skirmisher.item": "%1$s был порезан на куски %2$s с помощью %3$s",
+	"death.attack.legioner": "%1$s был сражён %2$s",
+	"death.attack.legioner.item": "%1$s был сражён %2$s с помощью %3$s",
+
+	"takesapillage.configGui.title": "It Takes a Pillage - Конфигурация",
+	"takesapillage.configGui.replaceIronGolems.title": "Появление глиняных големов",
+	"takesapillage.configGui.peacefulGolemRate.title": "Замена глиняного голема на мирной сложности",
+	"takesapillage.configGui.easyGolemRate.title": "Замена глиняного голема на лёгкой сложности",
+	"takesapillage.configGui.normalGolemRate.title": "Замена глиняного голема на нормальной сложности",
+	"takesapillage.configGui.hardGolemRate.title": "Замена глиняного голема на сложной сложности",
+	"takesapillage.configGui.removeBadOmen.title": "Молоко убирает дурной знак",
+	"takesapillage.configGui.pillageSiegesOccur.title": "Разбойничьи осады",
+
+	"instrument.takesapillage.raid_horn": "Горн рейда"
+
+}
