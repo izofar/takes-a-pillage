@@ -1,5 +1,6 @@
 package com.izofar.takesapillage;
 
+import com.izofar.takesapillage.client.ModModelLayers;
 import com.izofar.takesapillage.client.renderer.ArcherRenderer;
 import com.izofar.takesapillage.client.renderer.ClayGolemRenderer;
 import com.izofar.takesapillage.client.renderer.LegionerRenderer;
@@ -13,6 +14,7 @@ import com.izofar.takesapillage.event.ModEntityEvents;
 import com.izofar.takesapillage.event.ModWorldEvents;
 import com.izofar.takesapillage.init.ModEntityTypes;
 import com.izofar.takesapillage.init.ModItems;
+import net.minecraft.client.model.IllagerModel;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +45,12 @@ public abstract class RegistryEvents {
         event.registerEntityRenderer(ModEntityTypes.ARCHER.get(), ArcherRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.SKIRMISHER.get(), SkirmisherRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.LEGIONER.get(), LegionerRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModModelLayers.ARCHER, IllagerModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.LEGIONER, IllagerModel::createBodyLayer);
     }
 
     @SubscribeEvent
