@@ -2,9 +2,9 @@ package com.izofar.takesapillage.client.renderer;
 
 
 import com.izofar.takesapillage.TakesAPillageMod;
+import com.izofar.takesapillage.client.ModModelLayers;
 import com.izofar.takesapillage.client.model.LegionerModel;
 import com.izofar.takesapillage.entity.Legioner;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.IllagerRenderer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
@@ -18,7 +18,7 @@ public class LegionerRenderer extends IllagerRenderer<Legioner> {
     private static final ResourceLocation LEGIONER = new ResourceLocation(TakesAPillageMod.MODID, "textures/entity/legioner.png");
 
     public LegionerRenderer(EntityRendererProvider.Context context) {
-        super(context, new LegionerModel(context.bakeLayer(ModelLayers.PILLAGER)), 0.5F);
+        super(context, new LegionerModel(context.bakeLayer(ModModelLayers.LEGIONER)), 0.5F);
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
         this.model.getHat().visible = true;
     }
